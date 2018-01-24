@@ -34,15 +34,15 @@ Potree.FirstPersonControls = class FirstPersonControls extends THREE.EventDispat
             this.screenOrientation = window.orientation || 0;
         };
 
-        // if ('ondeviceorientationabsolute' in window) {
-        //     window.addEventListener('deviceorientationabsolute', onDeviceOrientationChangeEvent, false);
-        // } else if ('ondeviceorientation' in window) {
-        //     console.log("WARNING: Absolute coordinates could not be guaranteed.");
-        //     window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
-        // } else {
-        //     console.log("ERROR: No device orientation found.");
-        // }
-        window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
+        if ('ondeviceorientationabsolute' in window) {
+            window.addEventListener('deviceorientationabsolute', onDeviceOrientationChangeEvent, false);
+        } else if ('ondeviceorientation' in window) {
+            console.log("WARNING: Absolute coordinates could not be guaranteed.");
+            window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
+        } else {
+            console.log("ERROR: No device orientation found.");
+        }
+        // window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
         window.addEventListener('orientationchange', onScreenOrientationChangeEvent, false);
     }
 
