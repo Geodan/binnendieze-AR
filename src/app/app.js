@@ -48,6 +48,9 @@ Potree.loadPointCloud("greyhound://https://binnendieze.geodan.nl/resource/binnen
     viewer.setNavigationMode(Potree.FirstPersonControls);
 
     // Start location
+    currentPosition.latitude = 51.68784;
+    currentPosition.longitude = 5.30352;
+    updatePosition(currentPosition, currentHeight);
     // const startPosition = rotateCoords({x: 149213.286, y: 411008.908, z: 3.5}, viewer.scene.pointclouds[0]);
     // viewer.scene.view.position.x = startPosition.x;
     // viewer.scene.view.position.y = startPosition.y;
