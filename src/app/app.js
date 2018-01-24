@@ -25,7 +25,7 @@ const heightSlider = document.getElementById("heightRange");
 const heightValue = document.getElementById("heightValue");
 heightValue.innerHTML = currentHeight + "m";
 
-Potree.loadPointCloud("greyhound://https://metis.geodan.nl:8083/resource/binnendieze/", "binnendieze", e => {
+Potree.loadPointCloud("greyhound://metis.geodan.nl:8082/resource/binnendieze/", "binnendieze", e => {
     // Add point cloud to viewer
     const pointcloud = e.pointcloud;
     viewer.scene.addPointCloud(pointcloud);
