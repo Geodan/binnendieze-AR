@@ -2,6 +2,7 @@
 document.title = "Binnedieze 3D viewer";
 
 window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+window.potreeContainer = document.getElementById("potree_container")
 
 viewer.setFOV(60);
 viewer.setPointBudget(5*1000*1000);
@@ -10,8 +11,11 @@ viewer.setBackground("gradient");
 viewer.setDescription(``);
 viewer.loadSettingsFromURL();
 
+// let mapToggle;
 viewer.loadGUI(() => {
     viewer.setLanguage('en');
+    const mapToggle = document.getElementById("potree_map_toggle");
+    mapToggle.style.display = "inline";
 });
 
 let wpid;

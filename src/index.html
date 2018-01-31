@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="libs/openlayers3/ol.css" type="text/css">
 		<link rel="stylesheet" href="libs/spectrum/spectrum.css" type="text/css">
 		<link rel="stylesheet" href="app/app.css">
+		<link rel="stylesheet" href="app/components/map.css">
 	</head>
 
     <body>
@@ -37,7 +38,12 @@
 
 		<script src="libs/rdnaptrans/rdnaptrans.js"></script>
 
-		<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ">
+		<div class="map-container">
+			<div id="map" class="map" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px;"></div>
+			<div><button class="button" id="submitLocation">Bevestig Locatie</button></div>
+		</div>
+
+		<div id="potree_container" class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; display: none;">
 			<div id="potree_render_area">
 				<div id="heightContainer">
 					<div class="slidecontainer">
@@ -60,5 +66,6 @@
 		<script src="app/components/DeviceOrientationControls.js"></script>
 		<script src="app/components/location.js"></script>
 		<script src="app/app.js"></script>
+		<script src="app/components/map.js"></script>
     </body>
 </html>
