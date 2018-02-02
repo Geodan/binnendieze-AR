@@ -1,68 +1,30 @@
-"use strict"
 document.title = "Binnedieze 3D viewer";
 
-window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+let mode;
 
-viewer.setFOV(60);
-viewer.setPointBudget(5*1000*1000);
-viewer.setEDLEnabled(true);
-viewer.setBackground("gradient");
-viewer.setDescription(``);
-viewer.loadSettingsFromURL();
+$("#manualLoc").on("click", function() {
+    mode = "manual";
 
-// let mapToggle;
-viewer.loadGUI(() => {
-    viewer.setLanguage('en');
-    $("#potree_map_toggle").css("display", "inline");
-});
+    $("#welcomeContainer").css("display", "none")
+    $("#mapContainer").css("display", "inline");
 
-let wpid;
-let rotatedObject;
-let currentPosition = {
-    latitude: 0,
-    longitude: 0
-}
-let currentHeight = 3.5;
-$("#heightValue").text(currentHeight + "m");
+    $("#manualLoc").prop("disabled", true);
+    $("#autoLoc").prop("disabled", true);
 
-Potree.loadPointCloud("greyhound://https://binnendieze.geodan.nl/resource/binnendieze/", "binnendieze", e => {
-    // Add point cloud to viewer
-    const pointcloud = e.pointcloud;
-    viewer.scene.addPointCloud(pointcloud);
-
-    rotatedObject = viewer.scene.pointclouds[0]
-    rotatedObject.rotation.x = -Math.PI/2;
-
-    // Point styling
-    const material = pointcloud.material;
-    material.pointColorType = Potree.PointColorType.INTENSITY; // any Potree.PointColorType.XXXX
-    material.size = 3;
-    material.pointSizeType = Potree.PointSizeType.FIXED;
-    material.shape = Potree.PointShape.SQUARE;
-    material.uniforms.rgbBrightness.value = 0.1;
-    material.uniforms.rgbGamma.value = 0.8;
-
-    // Camera settings
-    viewer.fitToScreen();
-    viewer.setMoveSpeed(1);
-    viewer.setNavigationMode(Potree.FirstPersonControls);
-
-    // Start location
-    currentPosition.latitude = 51.68784;
-    currentPosition.longitude = 5.30352;
-    updatePosition(currentPosition, currentHeight);
-});
-
-$("#heightRange").on("input", function() {
-    currentHeight = this.value / 10;
-    $("#heightValue").text(currentHeight + "m");
-    updatePosition(currentPosition, currentHeight);
-});
-
-$("#locToggle").on("change", function() {
-    if(this.checked) {
-        trackLocation();
-    } else {
-        navigator.geolocation.clearWatch(wpid);
+    map.updateSize();
+    let accuracyGeom = accuracyFeature.getGeometry();
+    if (typeof accuracyGeom !== "undefined") {
+        view.fit(accuracyGeom, map.getSize());
+        autoZoom = view.getZoom();
     }
-});
+})
+
+$("#autoLoc").on("click", function() {
+    mode = "auto";
+
+    $("#potree_container").css("display", "inline");
+    $("#welcomeContainer").css("display", "none")
+
+    $("#manualLoc").prop("disabled", true);
+    $("#autoLoc").prop("disabled", true);
+})

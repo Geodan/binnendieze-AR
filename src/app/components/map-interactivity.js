@@ -1,35 +1,8 @@
-const view = new ol.View({
-    center: [0, 0],
-    zoom: 19
-});
-let autoZoom = view.getZoom();
-
-const map = new ol.Map({
-    layers: [
-        new ol.layer.Tile({
-        source: new ol.source.OSM()
-        })
-    ],
-    target: 'map',
-    controls: ol.control.defaults({
-        attributionOptions: {
-        collapsible: false
-        }
-    }),
-    view: view
-});
-
-const geolocation = new ol.Geolocation({
-    projection: view.getProjection()
-});
-
-geolocation.setTracking(true);
-
-geolocation.on('change', function() {
+geolocation.on('change:accuracy', function() {
     $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy() + ' [m]');
 });
 
-const accuracyFeature = new ol.Feature();
+let accuracyFeature = new ol.Feature();
 geolocation.on('change:accuracyGeometry', function() {
     const accuracyGeometry = geolocation.getAccuracyGeometry();
     accuracyFeature.setGeometry(accuracyGeometry);
@@ -39,7 +12,7 @@ geolocation.on('change:accuracyGeometry', function() {
     }
 });
 
-const positionFeature = new ol.Feature();
+let positionFeature = new ol.Feature();
 positionFeature.setStyle(new ol.style.Style({
     image: new ol.style.Circle({
         radius: 6,
@@ -52,14 +25,6 @@ positionFeature.setStyle(new ol.style.Style({
         })
     })
 }));
-
-geolocation.on('change:position', function() {
-    const coordinates = geolocation.getPosition();
-    view.setCenter(coordinates);
-
-    positionFeature.setGeometry(coordinates ?
-        new ol.geom.Point(coordinates) : null);
-});
 
 new ol.layer.Vector({
     map: map,
