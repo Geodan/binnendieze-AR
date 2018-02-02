@@ -2,7 +2,6 @@
 document.title = "Binnedieze 3D viewer";
 
 window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
-window.potreeContainer = document.getElementById("potree_container")
 
 viewer.setFOV(60);
 viewer.setPointBudget(5*1000*1000);
@@ -14,8 +13,7 @@ viewer.loadSettingsFromURL();
 // let mapToggle;
 viewer.loadGUI(() => {
     viewer.setLanguage('en');
-    const mapToggle = document.getElementById("potree_map_toggle");
-    mapToggle.style.display = "inline";
+    $("#potree_map_toggle").css("display", "inline");
 });
 
 let wpid;
@@ -25,9 +23,7 @@ let currentPosition = {
     longitude: 0
 }
 let currentHeight = 3.5;
-const heightSlider = document.getElementById("heightRange");
-const heightValue = document.getElementById("heightValue");
-heightValue.innerHTML = currentHeight + "m";
+$("#heightValue").text(currentHeight + "m");
 
 Potree.loadPointCloud("greyhound://https://binnendieze.geodan.nl/resource/binnendieze/", "binnendieze", e => {
     // Add point cloud to viewer
@@ -55,19 +51,13 @@ Potree.loadPointCloud("greyhound://https://binnendieze.geodan.nl/resource/binnen
     currentPosition.latitude = 51.68784;
     currentPosition.longitude = 5.30352;
     updatePosition(currentPosition, currentHeight);
-    // const startPosition = rotateCoords({x: 149213.286, y: 411008.908, z: 3.5}, viewer.scene.pointclouds[0]);
-    // viewer.scene.view.position.x = startPosition.x;
-    // viewer.scene.view.position.y = startPosition.y;
-    // viewer.scene.view.position.z = startPosition.z;
-
-    // trackLocation();
 });
 
-heightSlider.oninput = function() {
+$("#heightRange").on("input", function() {
     currentHeight = this.value / 10;
-    heightValue.innerHTML = currentHeight + "m";
+    $("#heightValue").text(currentHeight + "m");
     updatePosition(currentPosition, currentHeight);
-};
+});
 
 locToggle.addEventListener('change', function() {
     if(this.checked) {
