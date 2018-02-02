@@ -13,7 +13,7 @@
     display: none;
     position: absolute;
     left: 50%;
-    bottom: 10%;
+    bottom: 15%;
     transform: translate(-50%);
 }
 
@@ -34,4 +34,12 @@
     left: 50%;
     top: 10%;
     transform: translate(-50%);
+}
+
+#accuracy {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%);
+    font-size: 7pt;
 }

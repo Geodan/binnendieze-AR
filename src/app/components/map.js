@@ -23,14 +23,14 @@ var geolocation = new ol.Geolocation({
     projection: view.getProjection()
 });
 
-function el(id) {
-    return document.getElementById(id);
-}
-
 // el('track').addEventListener('change', function() {
 //     geolocation.setTracking(this.checked);
 // });
 geolocation.setTracking(true);
+
+geolocation.on('change', function() {
+    $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy() + ' [m]');
+});
 
 var accuracyFeature = new ol.Feature();
 geolocation.on('change:accuracyGeometry', function() {
@@ -105,5 +105,5 @@ $("#submitLocation").on("click", function () {
     currentPosition.latitude = position[1];
     currentPosition.longitude = position[0];
     updatePosition(currentPosition, currentHeight);
-    potreeContainer.style.display = "inline";
+    $("#potree_container").css("display", "inline");
 });
