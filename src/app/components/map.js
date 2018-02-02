@@ -1,10 +1,10 @@
-var view = new ol.View({
+const view = new ol.View({
     center: [0, 0],
     zoom: 19
 });
 let autoZoom = view.getZoom();
 
-var map = new ol.Map({
+const map = new ol.Map({
     layers: [
         new ol.layer.Tile({
         source: new ol.source.OSM()
@@ -19,22 +19,19 @@ var map = new ol.Map({
     view: view
 });
 
-var geolocation = new ol.Geolocation({
+const geolocation = new ol.Geolocation({
     projection: view.getProjection()
 });
 
-// el('track').addEventListener('change', function() {
-//     geolocation.setTracking(this.checked);
-// });
 geolocation.setTracking(true);
 
 geolocation.on('change', function() {
     $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy() + ' [m]');
 });
 
-var accuracyFeature = new ol.Feature();
+const accuracyFeature = new ol.Feature();
 geolocation.on('change:accuracyGeometry', function() {
-    let accuracyGeometry = geolocation.getAccuracyGeometry();
+    const accuracyGeometry = geolocation.getAccuracyGeometry();
     accuracyFeature.setGeometry(accuracyGeometry);
     if (view.getZoom() === autoZoom) {
         view.fit(accuracyGeometry, map.getSize())
@@ -42,7 +39,7 @@ geolocation.on('change:accuracyGeometry', function() {
     }
 });
 
-var positionFeature = new ol.Feature();
+const positionFeature = new ol.Feature();
 positionFeature.setStyle(new ol.style.Style({
     image: new ol.style.Circle({
         radius: 6,
@@ -57,7 +54,7 @@ positionFeature.setStyle(new ol.style.Style({
 }));
 
 geolocation.on('change:position', function() {
-    var coordinates = geolocation.getPosition();
+    const coordinates = geolocation.getPosition();
     view.setCenter(coordinates);
 
     positionFeature.setGeometry(coordinates ?
@@ -71,8 +68,8 @@ new ol.layer.Vector({
     })
 });
 
-var source = new ol.source.Vector();
-var vector = new ol.layer.Vector({
+const source = new ol.source.Vector();
+const vector = new ol.layer.Vector({
     source: source,
     style: new ol.style.Style({
         image: new ol.style.Circle({
@@ -85,7 +82,7 @@ var vector = new ol.layer.Vector({
 });
 map.addLayer(vector);
 
-var draw = new ol.interaction.Draw({
+const draw = new ol.interaction.Draw({
     source: source,
     type: "Point",
 });
