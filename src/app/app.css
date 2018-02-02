@@ -8,7 +8,7 @@
     right: -130px;
 }
 
-.slidecontainer {
+.slideContainer {
     width: 300px;
     height: 25px;
     transform: rotate(270deg);
@@ -52,7 +52,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.switch-container {
+.switchContainer {
     display: inline-block;
     position: relative;
     /* background: #303336; */

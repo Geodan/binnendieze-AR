@@ -59,7 +59,7 @@ $("#heightRange").on("input", function() {
     updatePosition(currentPosition, currentHeight);
 });
 
-locToggle.addEventListener('change', function() {
+$("#locToggle").on("change", function() {
     if(this.checked) {
         trackLocation();
     } else {
