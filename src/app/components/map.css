@@ -16,3 +16,22 @@
     bottom: 10%;
     transform: translate(-50%);
 }
+
+.textBox {
+    background: #f4f5f5;
+    padding: 5px;
+    border-radius: 2px;
+    color: #2980b9;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+#mapInstuctions {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%);
+}

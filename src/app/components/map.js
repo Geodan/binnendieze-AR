@@ -2,6 +2,7 @@ var view = new ol.View({
     center: [0, 0],
     zoom: 19
 });
+let autoZoom = view.getZoom();
 
 var map = new ol.Map({
     layers: [
@@ -33,7 +34,12 @@ geolocation.setTracking(true);
 
 var accuracyFeature = new ol.Feature();
 geolocation.on('change:accuracyGeometry', function() {
-    accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+    let accuracyGeometry = geolocation.getAccuracyGeometry();
+    accuracyFeature.setGeometry(accuracyGeometry);
+    if (view.getZoom() === autoZoom) {
+        view.fit(accuracyGeometry, map.getSize())
+        autoZoom = view.getZoom();
+    }
 });
 
 var positionFeature = new ol.Feature();
@@ -53,6 +59,7 @@ positionFeature.setStyle(new ol.style.Style({
 geolocation.on('change:position', function() {
     var coordinates = geolocation.getPosition();
     view.setCenter(coordinates);
+
     positionFeature.setGeometry(coordinates ?
         new ol.geom.Point(coordinates) : null);
 });
@@ -88,15 +95,15 @@ draw.on("drawstart", function() {
     source.clear()
 });
 
-const submitLocationButton = document.getElementById("submitLocation");
 draw.on("drawend", function() {
-    submitLocationButton.style.display = "inline";
+    $("#submitLocation").css("display", "inline");
+    setTimeout(function() { $("#submitLocation").prop("disabled", false); }, 100);
 })
 
-submitLocationButton.onclick = function() {
+$("#submitLocation").on("click", function () {
     const position = ol.proj.transform(source.getFeatures()[0].getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:4326');
     currentPosition.latitude = position[1];
     currentPosition.longitude = position[0];
     updatePosition(currentPosition, currentHeight);
     potreeContainer.style.display = "inline";
-};
+});
