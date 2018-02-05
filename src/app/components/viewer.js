@@ -12,6 +12,12 @@ viewer.loadSettingsFromURL();
 viewer.loadGUI(() => {
     viewer.setLanguage('en');
     $("#potree_map_toggle").css("display", "inline");
+    $("#potree_map_toggle").on("click", function() {
+        $("#potree_container").css("display", "none");
+        $("#mapContainer").css("display", "inline");
+        toggleMap();
+        $("#mapInstuctions").css("display", "none");
+    })
 });
 
 let rotatedObject;
@@ -45,4 +51,12 @@ $("#heightRange").on("input", function() {
     currentHeight = this.value / 10;
     $("#heightValue").text(currentHeight + "m");
     updatePosition(currentPosition, currentHeight);
+});
+
+$("#refreshMeasurements").on("click", function() {
+    console.log("object");
+    measuredPositions = [];
+    $("#measurements").css("display", "none");
+    $("#refreshMeasurements").prop("disabled", true);
+    $("#refreshMeasurements").css("display", "none");
 });

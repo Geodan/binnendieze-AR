@@ -15,5 +15,22 @@
     top: 115px;
     left: 90px;
     color: #ffffff;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+}
+
+#measurementsContainer{
+    position: absolute;
+    top: 2%;
+    right: 5%;
+}
+
+#measurements {
+    font-size: 8pt;
+    display: none;
+}
+
+#refreshMeasurements {
+    position: relative;
+    top: 7px;
+    height: 10px;
+    display: none;
 }

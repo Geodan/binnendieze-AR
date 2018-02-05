@@ -1,6 +1,23 @@
 document.title = "Binnedieze 3D viewer";
 
 let mode;
+function toggleMap() {
+    map.updateSize();
+    const coordinates = geolocation.getPosition();
+    const accuracyGeometry = geolocation.getAccuracyGeometry();
+    if (typeof coordinates !== "undefined") {
+        positionFeature.setGeometry(coordinates ?
+            new ol.geom.Point(coordinates) : null);
+        view.setCenter(coordinates);
+        autoLoc = view.getCenter();
+    }
+    if (typeof accuracyGeometry !== "undefined") {
+        accuracyFeature.setGeometry(accuracyGeometry);
+        view.fit(accuracyGeometry, map.getSize());
+        autoZoom = view.getZoom();
+        $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
+    }
+}
 
 $("#manualLoc").on("click", function() {
     mode = "manual";
@@ -11,13 +28,8 @@ $("#manualLoc").on("click", function() {
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
 
-    map.updateSize();
-    let accuracyGeom = accuracyFeature.getGeometry();
-    if (typeof accuracyGeom !== "undefined") {
-        view.fit(accuracyGeom, map.getSize());
-        autoZoom = view.getZoom();
-    }
-})
+    setTimeout(toggleMap(), 100)
+});
 
 $("#autoLoc").on("click", function() {
     mode = "auto";

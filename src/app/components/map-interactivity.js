@@ -1,38 +1,3 @@
-geolocation.on('change:accuracy', function() {
-    $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy() + ' [m]');
-});
-
-let accuracyFeature = new ol.Feature();
-geolocation.on('change:accuracyGeometry', function() {
-    const accuracyGeometry = geolocation.getAccuracyGeometry();
-    accuracyFeature.setGeometry(accuracyGeometry);
-    if (view.getZoom() === autoZoom) {
-        view.fit(accuracyGeometry, map.getSize())
-        autoZoom = view.getZoom();
-    }
-});
-
-let positionFeature = new ol.Feature();
-positionFeature.setStyle(new ol.style.Style({
-    image: new ol.style.Circle({
-        radius: 6,
-        fill: new ol.style.Fill({
-            color: '#3399CC'
-        }),
-        stroke: new ol.style.Stroke({
-            color: '#fff',
-            width: 2
-        })
-    })
-}));
-
-new ol.layer.Vector({
-    map: map,
-    source: new ol.source.Vector({
-        features: [accuracyFeature, positionFeature]
-    })
-});
-
 const source = new ol.source.Vector();
 const vector = new ol.layer.Vector({
     source: source,
@@ -43,7 +8,8 @@ const vector = new ol.layer.Vector({
                 color: '#e74c3c'
             })
         })
-    })
+    }),
+    updateWhileInteracting: true
 });
 map.addLayer(vector);
 
@@ -68,4 +34,14 @@ $("#submitLocation").on("click", function () {
     currentPosition.longitude = position[0];
     updatePosition(currentPosition, currentHeight);
     $("#potree_container").css("display", "inline");
+});
+
+$("#centerView").on("click", function() {
+    console.log("click");
+    view.setCenter(geolocation.getPosition());
+    view.fit(geolocation.getAccuracyGeometry(), map.getSize());
+    autoZoom = view.getZoom();
+    autoLoc = view.getCenter();
+    $("#centerView").css("display", "none");
+    $("#centerView").prop("disabled", true);
 });

@@ -15099,7 +15099,7 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			let imgMapToggle = document.createElement("img");
 			imgMapToggle.src = new URL(Potree.resourcePath + "/icons/map_icon.png").href;
 			imgMapToggle.style.display = "none";
-			imgMapToggle.onclick = e => {this.toggleMap()};
+			// imgMapToggle.onclick = e => {this.toggleMap()};
 			imgMapToggle.id = "potree_map_toggle";
 
 			viewer.renderArea.insertBefore(imgMapToggle, viewer.renderArea.children[0]);

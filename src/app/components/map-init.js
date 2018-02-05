@@ -3,6 +3,7 @@ const view = new ol.View({
     zoom: 19
 });
 let autoZoom = view.getZoom();
+let autoLoc = view.getCenter();
 
 const map = new ol.Map({
     layers: [
@@ -17,4 +18,27 @@ const map = new ol.Map({
         }
     }),
     view: view
+});
+
+let accuracyFeature = new ol.Feature();
+
+let positionFeature = new ol.Feature();
+positionFeature.setStyle(new ol.style.Style({
+    image: new ol.style.Circle({
+        radius: 6,
+        fill: new ol.style.Fill({
+            color: '#3399CC'
+        }),
+        stroke: new ol.style.Stroke({
+            color: '#fff',
+            width: 2
+        })
+    })
+}));
+
+new ol.layer.Vector({
+    map: map,
+    source: new ol.source.Vector({
+        features: [accuracyFeature, positionFeature]
+    })
 });

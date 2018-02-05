@@ -53,7 +53,7 @@
 			<div class="textBox" id="mapInstuctions">Wat is uw precieze locatie?</div>
 			<div class="textBox" id="accuracy">Geschatte accuraatheid: -</div>
 			<div><button class="button" id="submitLocation" disabled="true" >Bevestig Locatie</button></div>
-			<div><button class="button" id="centerView" disabled="true">C</button></div>
+			<div><input class="textBox" id="centerView" type="image" src="app/resources/img/ux-locate-on.png" /></div>
 		</div>
 
 		<div id="potree_container" class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; display: none;">
@@ -64,24 +64,22 @@
 					</div>
 					<div class="sliderValue" id="heightValue"></div>
 				</div>
+				<div id="measurementsContainer">
+					<div class="textBox" id="measurements">Locatie metingen: 0/20</div>
+					<input class="textBox" id="refreshMeasurements" disabled="true" type="image" src="app/resources/img/refresh_icon.png">
+				</div>
 			</div>
 
 			<div id="potree_sidebar_container"></div>
-			<!-- <div id="locSwitch" class="switchContainer">
-				<label class="switch">
-					<input type="checkbox" id="locToggle">
-					<span class="slider round"></span>
-				</label>
-				Track Location -->
 			</div>
 		</div>
 
 		<script src="app/components/DeviceOrientationControls.js"></script>
 
 		<script src="app/components/map-init.js"></script>
+		<script src="app/components/location-init.js"></script>
 		<script src="app/components/location-utils.js"></script>
 		<script src="app/app.js"></script>
-		<script src="app/components/location-init.js"></script>
 		<script src="app/components/viewer.js"></script>
 		<script src="app/components/map-interactivity.js"></script>
 		<script src="app/components/location-track.js"></script>
