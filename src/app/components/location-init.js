@@ -5,8 +5,6 @@
 ol.proj.setProj4(proj4);
 proj4.defs("EPSG:28992","+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.999908 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +no_defs");
 proj4.defs("EPSG:4258","+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs");
-console.log(ol.proj.transform([4.913048, 52.342248], 'EPSG:4258', 'EPSG:28992'));
-console.log(ol.proj.transform([4.913048, 52.342248], 'EPSG:4326', 'EPSG:28992'));
 
 let currentPosition = {
     latitude: 0,
