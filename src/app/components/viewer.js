@@ -26,7 +26,7 @@ function enablePotree() {
                 } else if (mode === "auto") {
                     const coordinates = ol.proj.transform([currentPosition.longitude, currentPosition.latitude], 'EPSG:4326', 'EPSG:3857');
                     toggleMap(coordinates);
-                } else if (mode === "regular") {
+                } else if (mode === "firstPerson" || mode === "earth") {
                     const coordinates = ol.proj.transform([viewer.scene.view.position.x, viewer.scene.view.position.y], 'EPSG:28992', 'EPSG:3857');
                     toggleMap(coordinates);
                 }
@@ -51,9 +51,18 @@ function enablePotree() {
 
             // Camera settings
             viewer.fitToScreen();
-            if (mode === "regular") {
+            if (mode === "firstPerson") {
                 viewer.setMoveSpeed(1);
                 viewer.setNavigationMode(Potree.FirstPersonControls);
+            } else if (mode === "earth") {
+                viewer.setNavigationMode(Potree.EarthControls);
+                viewer.scene.view.position.x = 149281.65978994727;
+                viewer.scene.view.position.y = 411044.88721504353;
+                viewer.scene.view.position.z = 1353.5061355679848;
+                setTimeout(function () {
+                    viewer.scene.view.yaw = 0;
+                    viewer.scene.view.pitch = -Math.PI/2;
+                }, 100);
             } else {
                 rotatedObject = viewer.scene.pointclouds[0]
                 rotatedObject.rotation.x = -Math.PI/2;

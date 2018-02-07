@@ -15,16 +15,6 @@ function rotateCoords(position, rotatedObject) {
     return rotatedPosition;
 }
 
-// function rotateCoordsBack(position, rotatedObject) {
-//     "use strict";
-
-//     const rotatedPosition = {x: 0, y: 0, z: 0};
-//     rotatedPosition.x = position.x;
-//     rotatedPosition.y = -position.z + rotatedObject.position.z + rotatedObject.position.y
-//     rotatedPosition.z = position.y - rotatedObject.position.y + rotatedObject.position.z
-//     return rotatedPosition;
-// }
-
 function updatePosition(location, height) {
     "use strict";
 

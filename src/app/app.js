@@ -12,7 +12,7 @@ $("#manualLoc").on("click", function() {
 
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
-    $("#startRegular").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
 
     setTimeout(toggleMap(), 100);
 });
@@ -21,22 +21,22 @@ $("#autoLoc").on("click", function() {
     mode = "auto";
     geolocation.setTracking(true);
 
-    $("#welcomeContainer").css("z-index", 1)
-    $("#potree_container").css("z-index", 3)
+    $("#welcomeContainer").css("z-index", 1);
+    $("#potree_container").css("z-index", 3);
 
     enablePotree();
 
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
-    $("#startRegular").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
 
     $("#accuracy").css("visibility", "hidden");
     $("#mapInstuctions").css("visibility", "hidden");
     map.removeInteraction(draw);
 });
 
-$("#startRegular").on("click", function() {
-    mode = "regular";
+$("#fpControls").on("click", function() {
+    mode = "firstPerson";
 
     $("#welcomeContainer").css("z-index", 1);
     $("#mapContainer").css("z-index", 3);
@@ -44,12 +44,28 @@ $("#startRegular").on("click", function() {
 
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
-    $("#startRegular").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
     $("#heightRange").prop("disabled", true);
     $("#heightContainer").css("visibility", "hidden");
     $("#accuracy").css("visibility", "hidden");
 
     const startCoords = ol.proj.transform([5.303330, 51.688878], 'EPSG:4326', 'EPSG:3857')
-    setTimeout(toggleMap(startCoords, 14), 100);
+    setTimeout(toggleMap(startCoords, 15), 100);
     positionFeature.setGeometry();
+});
+
+$("#earthControls").on("click", function() {
+    mode = "earth";
+
+    $("#welcomeContainer").css("z-index", 1);
+    $("#potree_container").css("z-index", 3);
+
+    enablePotree();
+
+    $("#manualLoc").prop("disabled", true);
+    $("#autoLoc").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
+    $("#heightRange").prop("disabled", true);
+    $("#heightContainer").css("visibility", "hidden");
+    $("#accuracy").css("visibility", "hidden");
 });

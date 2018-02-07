@@ -75,7 +75,7 @@ $("#mapClose").on("click", function() {
     if (typeof window.viewer !== "undefined") {
         $("#mapContainer").css("z-index", 1);
         $("#potree_container").css("z-index", 3);
-    } else{
+    } else {
         source.clear();
         positionFeature.setGeometry();
         accuracyFeature.setGeometry();
