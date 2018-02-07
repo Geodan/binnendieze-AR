@@ -25,12 +25,12 @@
 
 #measurements {
     font-size: 8pt;
-    display: none;
+    visibility: hidden;
 }
 
 #refreshMeasurements {
     position: relative;
     top: 7px;
     height: 10px;
-    display: none;
+    visibility: hidden;
 }

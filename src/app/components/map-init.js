@@ -2,23 +2,6 @@ const view = new ol.View({
     center: [0, 0],
     zoom: 19
 });
-let autoZoom = view.getZoom();
-let autoLoc = view.getCenter();
-
-const map = new ol.Map({
-    layers: [
-        new ol.layer.Tile({
-        source: new ol.source.OSM()
-        })
-    ],
-    target: 'map',
-    controls: ol.control.defaults({
-        attributionOptions: {
-        collapsible: false
-        }
-    }),
-    view: view
-});
 
 let accuracyFeature = new ol.Feature();
 
@@ -36,9 +19,44 @@ positionFeature.setStyle(new ol.style.Style({
     })
 }));
 
-new ol.layer.Vector({
-    map: map,
-    source: new ol.source.Vector({
-        features: [accuracyFeature, positionFeature]
-    })
+const map = new ol.Map({
+    layers: [
+        new ol.layer.Tile({
+        source: new ol.source.OSM()
+        }),
+        new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [accuracyFeature, positionFeature]
+            })
+        })
+    ],
+    target: 'map',
+    controls: ol.control.defaults({
+        attributionOptions: {
+        collapsible: false
+        }
+    }),
+    view: view
 });
+
+function toggleMap(coordinates) {
+    map.updateSize();
+    let accuracyGeometry;
+    if (typeof coordinates === "undefined") {
+        coordinates = geolocation.getPosition();
+        accuracyGeometry = geolocation.getAccuracyGeometry();
+    }
+
+    if (typeof coordinates !== "undefined") {
+        positionFeature.setGeometry(coordinates ?
+            new ol.geom.Point(coordinates) : null);
+        view.setCenter(coordinates);
+        autoLoc = view.getCenter();
+    }
+    if (typeof accuracyGeometry !== "undefined") {
+        accuracyFeature.setGeometry(accuracyGeometry);
+        view.fit(accuracyGeometry, map.getSize());
+        autoZoom = view.getZoom();
+        $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
+    }
+}

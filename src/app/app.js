@@ -1,42 +1,32 @@
+"use strict"
 document.title = "Binnedieze 3D viewer";
 
 let mode;
-function toggleMap() {
-    map.updateSize();
-    const coordinates = geolocation.getPosition();
-    const accuracyGeometry = geolocation.getAccuracyGeometry();
-    if (typeof coordinates !== "undefined") {
-        positionFeature.setGeometry(coordinates ?
-            new ol.geom.Point(coordinates) : null);
-        view.setCenter(coordinates);
-        autoLoc = view.getCenter();
-    }
-    if (typeof accuracyGeometry !== "undefined") {
-        accuracyFeature.setGeometry(accuracyGeometry);
-        view.fit(accuracyGeometry, map.getSize());
-        autoZoom = view.getZoom();
-        $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
-    }
-}
 
 $("#manualLoc").on("click", function() {
     mode = "manual";
 
-    $("#welcomeContainer").css("display", "none")
-    $("#mapContainer").css("display", "inline");
+    $("#welcomeContainer").css("z-index", 1)
+    $("#mapContainer").css("z-index", 3);
 
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
 
-    setTimeout(toggleMap(), 100)
+    setTimeout(toggleMap(), 100);
 });
 
 $("#autoLoc").on("click", function() {
     mode = "auto";
 
-    $("#potree_container").css("display", "inline");
-    $("#welcomeContainer").css("display", "none")
+    $("#welcomeContainer").css("z-index", 1)
+    $("#potree_container").css("z-index", 3)
+
+    enablePotree();
 
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
+
+    $("#accuracy").css("visibility", "hidden");
+    $("#mapInstuctions").css("visibility", "hidden");
+    map.removeInteraction(draw);
 })
