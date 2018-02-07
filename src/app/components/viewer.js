@@ -52,7 +52,7 @@ function enablePotree() {
             // Camera settings
             viewer.fitToScreen();
             viewer.setMoveSpeed(1);
-            viewer.setNavigationMode(Potree.FirstPersonControls);
+            viewer.setNavigationMode(Potree.DeviceOrientationControls);
 
             resolve();
         });

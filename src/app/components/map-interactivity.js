@@ -31,6 +31,12 @@ draw.on("drawend", function() {
     setTimeout(function() { $("#submitLocation").prop("disabled", false); }, 100);
 })
 
+// A hack to prevent draw on drag
+map.on("moveend", function() {
+    setTimeout(function() {map.removeInteraction(draw)}, 10);
+    map.addInteraction(draw);
+});
+
 $("#submitLocation").on("click", function () {
     $("#mapContainer").css("z-index", 1);
     $("#potree_container").css("z-index", 3);
@@ -79,10 +85,4 @@ $("#mapClose").on("click", function() {
         $("#manualLoc").prop("disabled", false);
         $("#autoLoc").prop("disabled", false);
     }
-});
-
-// A hack to prevent draw on drag
-map.on("moveend", function() {
-    setTimeout(function() {map.removeInteraction(draw)}, 10);
-    map.addInteraction(draw);
 });

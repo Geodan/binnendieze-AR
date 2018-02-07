@@ -14526,6 +14526,8 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			return this.fpControls;
 		}else if(navigationMode === Potree.EarthControls){
 			return this.earthControls;
+		}else if(navigationMode === Potree.DeviceOrientationControls){
+			return this.deviceOrientationControls;
 		}else{
 			return null;
 		}
@@ -15034,6 +15036,13 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			//this.fpControls.addEventListener("move_speed_changed", (event) => {
 			//	this.setMoveSpeed(this.fpControls.moveSpeed);
 			//});
+		}
+
+		{
+			this.deviceOrientationControls = new Potree.DeviceOrientationControls(this);
+			this.deviceOrientationControls.enabled = false;
+			this.deviceOrientationControls.addEventListener("start", this.disableAnnotations.bind(this));
+			this.deviceOrientationControls.addEventListener("end", this.enableAnnotations.bind(this));
 		}
 
 		//{ // create GEO CONTROLS
