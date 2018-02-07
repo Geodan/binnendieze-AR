@@ -13,20 +13,13 @@ function rotateCoords(position, rotatedObject) {
     return rotatedPosition;
 }
 
-function wgsToRD (latitude, longitude) {
-    "use strict";
-
-    const rd = rdnaptrans.Transform.etrs2rd(new rdnaptrans.Geographic(latitude, longitude));
-    return {x: rd.X, y: rd.Y}
-}
-
 function updatePosition(location, height) {
     "use strict";
 
-    let coords = wgsToRD(location.latitude, location.longitude);
+    let coords = ol.proj.transform([location.longitude, location.latitude], 'EPSG:4326', 'EPSG:28992')
 
     if (typeof rotatedObject !== undefined) {
-        coords = rotateCoords({x: coords.x, y: coords.y, z: height}, rotatedObject);
+        coords = rotateCoords({x: coords[1], y: coords[0], z: height}, rotatedObject);
     }
 
     viewer.scene.view.position.x = coords.x;
