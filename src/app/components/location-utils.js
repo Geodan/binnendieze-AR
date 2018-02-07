@@ -8,10 +8,8 @@ function rotateCoords(position, rotatedObject) {
 
     const rotatedPosition = {x: 0, y: 0, z: 0};
     rotatedPosition.x = position.x;
-    // rotatedPosition.y = position.z + rotatedObject.position.y - rotatedObject.position.z;
-    rotatedPosition.y = Math.abs(rotatedObject.position.z - position.z) + rotatedObject.position.y;
-    // rotatedPosition.z = rotatedObject.position.y - position.y + rotatedObject.position.z;
-    rotatedPosition.z = (rotatedObject.position.y - position.y) + rotatedObject.position.z;
+    rotatedPosition.y = position.z + rotatedObject.position.y - rotatedObject.position.z;
+    rotatedPosition.z = rotatedObject.position.y - position.y + rotatedObject.position.z;
     return rotatedPosition;
 }
 
