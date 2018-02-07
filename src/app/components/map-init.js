@@ -41,7 +41,7 @@ const map = new ol.Map({
     view: view
 });
 
-function toggleMap(coordinates) {
+function toggleMap(coordinates, zoom) {
     map.updateSize();
     let accuracyGeometry;
     if (typeof coordinates === "undefined") {
@@ -58,5 +58,9 @@ function toggleMap(coordinates) {
         accuracyFeature.setGeometry(accuracyGeometry);
         view.fit(accuracyGeometry, map.getSize());
         $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
+    }
+
+    if (typeof zoom !== "undefined") {
+        view.setZoom(zoom);
     }
 }

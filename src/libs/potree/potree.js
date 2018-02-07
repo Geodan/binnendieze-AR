@@ -15420,15 +15420,20 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			this.inputHandler.addInputListener(this.controls);
 		}
 		//
-		if(this.controls !== null){
+		if(this.controls === Potree.DeviceOrientationControls){
 			this.controls.setScene(scene);
 			this.controls.update(delta);
 
 			camera.position.copy(scene.view.position);
-			// camera.rotation.order = "YXZ";
-			// camera.rotation.x = Math.PI / 2 + this.scene.view.pitch;
-			// camera.rotation.z = this.scene.view.yaw;
 			// camera.quaternion.setFromEuler(this.scene.view.euler)
+		} else if (this.controls !== null) {
+			this.controls.setScene(scene);
+			this.controls.update(delta);
+
+			camera.position.copy(scene.view.position);
+			camera.rotation.order = "ZXY";
+			camera.rotation.x = Math.PI / 2 + this.scene.view.pitch;
+			camera.rotation.z = this.scene.view.yaw;
 		}
 
 		{ // update clip boxes

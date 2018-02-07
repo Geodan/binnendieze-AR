@@ -15,7 +15,6 @@ let currentPosition = {
 let currentHeight = 3.5;
 
 const geolocation = new ol.Geolocation({
-    tracking: true,
     trackingOptions: {enableHighAccuracy: true},
     projection: view.getProjection()
 });

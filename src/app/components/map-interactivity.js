@@ -44,27 +44,25 @@ $("#submitLocation").on("click", function () {
     $("#potree_container").css("z-index", 3);
     $("#submitLocation").css("visibility", "hidden");
 
-    if (typeof window.viewer === "undefined") {
-        enablePotree().then(function() {
-            const position = ol.proj.transform(source.getFeatures()[0].getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:4326');
-            currentPosition.latitude = position[1];
-            currentPosition.longitude = position[0];
-            updatePosition(currentPosition, currentHeight);
-        });
-    } else {
+    function setPosition() {
         const position = ol.proj.transform(source.getFeatures()[0].getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:4326');
         currentPosition.latitude = position[1];
         currentPosition.longitude = position[0];
         updatePosition(currentPosition, currentHeight);
     }
+
+    if (typeof window.viewer === "undefined") {
+        enablePotree().then(function() {
+            setPosition();
+        });
+    } else {
+        setPosition();
+    }
 });
 
 $("#centerView").on("click", function() {
     if (mode === "manual") {
-        // view.setCenter(geolocation.getPosition());
         view.fit(geolocation.getAccuracyGeometry(), map.getSize());
-        autoZoom = view.getZoom();
-        autoLoc = view.getCenter();
     } else if (mode === "auto") {
         view.setCenter(positionFeature.getGeometry().getCoordinates());
     }

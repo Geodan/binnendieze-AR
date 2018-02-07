@@ -26,6 +26,9 @@ function enablePotree() {
                 } else if (mode === "auto") {
                     const coordinates = ol.proj.transform([currentPosition.longitude, currentPosition.latitude], 'EPSG:4326', 'EPSG:3857');
                     toggleMap(coordinates);
+                } else if (mode === "regular") {
+                    const coordinates = ol.proj.transform([viewer.scene.view.position.x, viewer.scene.view.position.y], 'EPSG:28992', 'EPSG:3857');
+                    toggleMap(coordinates);
                 }
             })
         });
@@ -36,9 +39,6 @@ function enablePotree() {
             // Add point cloud to viewer
             const pointcloud = e.pointcloud;
             viewer.scene.addPointCloud(pointcloud);
-
-            rotatedObject = viewer.scene.pointclouds[0]
-            rotatedObject.rotation.x = -Math.PI/2;
 
             // Point styling
             const material = pointcloud.material;
@@ -51,8 +51,14 @@ function enablePotree() {
 
             // Camera settings
             viewer.fitToScreen();
-            viewer.setMoveSpeed(1);
-            viewer.setNavigationMode(Potree.DeviceOrientationControls);
+            if (mode === "regular") {
+                viewer.setMoveSpeed(1);
+                viewer.setNavigationMode(Potree.FirstPersonControls);
+            } else {
+                rotatedObject = viewer.scene.pointclouds[0]
+                rotatedObject.rotation.x = -Math.PI/2;
+                viewer.setNavigationMode(Potree.DeviceOrientationControls);
+            }
 
             resolve();
         });
