@@ -1,3 +1,5 @@
+"use strict"
+
 const source = new ol.source.Vector();
 const vector = new ol.layer.Vector({
     source: source,

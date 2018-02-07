@@ -1,3 +1,5 @@
+"use strict"
+
 const view = new ol.View({
     center: [0, 0],
     zoom: 19
@@ -51,12 +53,10 @@ function toggleMap(coordinates) {
         positionFeature.setGeometry(coordinates ?
             new ol.geom.Point(coordinates) : null);
         view.setCenter(coordinates);
-        autoLoc = view.getCenter();
     }
     if (typeof accuracyGeometry !== "undefined") {
         accuracyFeature.setGeometry(accuracyGeometry);
         view.fit(accuracyGeometry, map.getSize());
-        autoZoom = view.getZoom();
         $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
     }
 }
