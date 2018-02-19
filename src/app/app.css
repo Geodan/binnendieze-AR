@@ -1,17 +1,5 @@
-.body {
+body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-#heightContainer {
-    position: absolute;
-    bottom: 20%;
-    right: -130px;
-}
-
-.slidecontainer {
-    width: 300px;
-    height: 25px;
-    transform: rotate(270deg);
 }
 
 .slider {
@@ -43,40 +31,6 @@
     background: #48b;
     cursor: pointer;
 }
-
-#heightValue {
-    position: relative;
-    top: 115px;
-    left: 90px;
-    color: #ffffff;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.switch-container {
-    display: inline-block;
-    position: relative;
-    /* background: #303336; */
-    border: 1px solid #444;
-    color: #edffff;
-    fill: #edffff;
-    border-radius: 4px;
-    padding: 5px 12px;
-    margin: 2px 3px;
-    line-height: 200%;
-    font-family: Verdana;
-}
-
-/* The switch - the box around the slider */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 30px;
-    height: 17px;
-    margin-right: 5px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {display:none;}
 
 /* The slider */
 .slider {
@@ -126,8 +80,26 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-#locSwitch {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+.button {
+    background-color: #2980b9; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 3px;
+}
+
+.textBox {
+    background: #f4f5f5;
+    padding: 5px;
+    border-radius: 2px;
+    color: #2980b9;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    text-align: center;
 }

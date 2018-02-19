@@ -14526,6 +14526,8 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			return this.fpControls;
 		}else if(navigationMode === Potree.EarthControls){
 			return this.earthControls;
+		}else if(navigationMode === Potree.DeviceOrientationControls){
+			return this.deviceOrientationControls;
 		}else{
 			return null;
 		}
@@ -15036,6 +15038,13 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			//});
 		}
 
+		{
+			this.deviceOrientationControls = new Potree.DeviceOrientationControls(this);
+			this.deviceOrientationControls.enabled = false;
+			this.deviceOrientationControls.addEventListener("start", this.disableAnnotations.bind(this));
+			this.deviceOrientationControls.addEventListener("end", this.enableAnnotations.bind(this));
+		}
+
 		//{ // create GEO CONTROLS
 		//	this.geoControls = new Potree.GeoControls(this.scene.camera, this.renderer.domElement);
 		//	this.geoControls.enabled = false;
@@ -15099,7 +15108,7 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			let imgMapToggle = document.createElement("img");
 			imgMapToggle.src = new URL(Potree.resourcePath + "/icons/map_icon.png").href;
 			imgMapToggle.style.display = "none";
-			imgMapToggle.onclick = e => {this.toggleMap()};
+			// imgMapToggle.onclick = e => {this.toggleMap()};
 			imgMapToggle.id = "potree_map_toggle";
 
 			viewer.renderArea.insertBefore(imgMapToggle, viewer.renderArea.children[0]);
@@ -15411,15 +15420,20 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 			this.inputHandler.addInputListener(this.controls);
 		}
 		//
-		if(this.controls !== null){
+		if(scene.view.navigationMode === Potree.DeviceOrientationControls){
 			this.controls.setScene(scene);
 			this.controls.update(delta);
 
 			camera.position.copy(scene.view.position);
-			// camera.rotation.order = "YXZ";
-			// camera.rotation.x = Math.PI / 2 + this.scene.view.pitch;
-			// camera.rotation.z = this.scene.view.yaw;
 			// camera.quaternion.setFromEuler(this.scene.view.euler)
+		} else if (this.controls !== null) {
+			this.controls.setScene(scene);
+			this.controls.update(delta);
+
+			camera.position.copy(scene.view.position);
+			camera.rotation.order = "ZXY";
+			camera.rotation.x = Math.PI / 2 + this.scene.view.pitch;
+			camera.rotation.z = this.scene.view.yaw;
 		}
 
 		{ // update clip boxes

@@ -1,0 +1,49 @@
+#submitLocation{
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    transform: translate(-50%);
+}
+
+#mapInstuctions {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%);
+}
+
+#accuracy {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%);
+    font-size: 7pt;
+}
+
+#centerView {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    height: 30px;
+    visibility: hidden;
+    /* padding: 2px; */
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    border-color: black;
+}
+
+#mapClose {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    height: 40px;
+}
+
+.ol-rotate {
+    top: auto;
+    right: auto;
+    left: 1%;
+    bottom: 1%;
+}

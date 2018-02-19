@@ -14,7 +14,7 @@
  *
  */
 
-Potree.FirstPersonControls = class FirstPersonControls extends THREE.EventDispatcher{
+Potree.DeviceOrientationControls = class DeviceOrientationControls extends THREE.EventDispatcher{
     constructor(viewer){
         super();
 
@@ -37,10 +37,10 @@ Potree.FirstPersonControls = class FirstPersonControls extends THREE.EventDispat
         if ('ondeviceorientationabsolute' in window) {
             window.addEventListener('deviceorientationabsolute', onDeviceOrientationChangeEvent, false);
         } else if ('ondeviceorientation' in window) {
-            console.log("WARNING: Absolute coordinates could not be guaranteed.");
+            alert("WARNING: Absolute coordinates could not be guaranteed.");
             window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
         } else {
-            console.log("ERROR: No device orientation found.");
+            alert("ERROR: No device orientation found.");
         }
         // window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
         window.addEventListener('orientationchange', onScreenOrientationChangeEvent, false);
@@ -64,11 +64,6 @@ Potree.FirstPersonControls = class FirstPersonControls extends THREE.EventDispat
             // let qm = new THREE.Quaternion();
             // THREE.Quaternion.slerp(viewer.scene.camera.quaternion, currentQ, qm, this.fadeFactor * delta);
             // viewer.scene.camera.quaternion.set(qm.x, qm.y, qm.z, qm.w)
-
-            // document.getElementById("DebugMessage").innerHTML = "(" +
-            //     Math.round(THREE.Math.radToDeg(viewer.scene.camera.rotation.x))+ ", " +
-            //     Math.round(THREE.Math.radToDeg(viewer.scene.camera.rotation.y)) + ", " +
-            //     Math.round(THREE.Math.radToDeg(viewer.scene.camera.rotation.z)) + ")";
         }
     }
 };

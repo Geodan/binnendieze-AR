@@ -1,74 +1,71 @@
 "use strict"
 document.title = "Binnedieze 3D viewer";
 
-window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+let mode;
 
-viewer.setFOV(60);
-viewer.setPointBudget(5*1000*1000);
-viewer.setEDLEnabled(true);
-viewer.setBackground("gradient");
-viewer.setDescription(``);
-viewer.loadSettingsFromURL();
+$("#manualLoc").on("click", function() {
+    mode = "manual";
+    geolocation.setTracking(true);
 
-viewer.loadGUI(() => {
-    viewer.setLanguage('en');
+    $("#welcomeContainer").css("z-index", 1);
+    $("#mapContainer").css("z-index", 3);
+
+    $("#manualLoc").prop("disabled", true);
+    $("#autoLoc").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
+
+    setTimeout(toggleMap(), 100);
 });
 
-let wpid;
-let rotatedObject;
-let currentPosition = {
-    latitude: 0,
-    longitude: 0
-}
-let currentHeight = 3.5;
-const heightSlider = document.getElementById("heightRange");
-const heightValue = document.getElementById("heightValue");
-heightValue.innerHTML = currentHeight + "m";
+$("#autoLoc").on("click", function() {
+    mode = "auto";
+    geolocation.setTracking(true);
 
-Potree.loadPointCloud("greyhound://https://binnendieze.geodan.nl/resource/binnendieze/", "binnendieze", e => {
-    // Add point cloud to viewer
-    const pointcloud = e.pointcloud;
-    viewer.scene.addPointCloud(pointcloud);
+    $("#welcomeContainer").css("z-index", 1);
+    $("#potree_container").css("z-index", 3);
 
-    rotatedObject = viewer.scene.pointclouds[0]
-    rotatedObject.rotation.x = -Math.PI/2;
+    enablePotree();
 
-    // Point styling
-    const material = pointcloud.material;
-    material.pointColorType = Potree.PointColorType.INTENSITY; // any Potree.PointColorType.XXXX
-    material.size = 3;
-    material.pointSizeType = Potree.PointSizeType.FIXED;
-    material.shape = Potree.PointShape.SQUARE;
-    material.uniforms.rgbBrightness.value = 0.1;
-    material.uniforms.rgbGamma.value = 0.8;
+    $("#manualLoc").prop("disabled", true);
+    $("#autoLoc").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
 
-    // Camera settings
-    viewer.fitToScreen();
-    viewer.setMoveSpeed(1);
-    viewer.setNavigationMode(Potree.FirstPersonControls);
-
-    // Start location
-    currentPosition.latitude = 51.68784;
-    currentPosition.longitude = 5.30352;
-    updatePosition(currentPosition, currentHeight);
-    // const startPosition = rotateCoords({x: 149213.286, y: 411008.908, z: 3.5}, viewer.scene.pointclouds[0]);
-    // viewer.scene.view.position.x = startPosition.x;
-    // viewer.scene.view.position.y = startPosition.y;
-    // viewer.scene.view.position.z = startPosition.z;
-
-    // trackLocation();
+    $("#accuracy").css("visibility", "hidden");
+    $("#mapInstuctions").css("visibility", "hidden");
+    map.removeInteraction(draw);
 });
 
-heightSlider.oninput = function() {
-    currentHeight = this.value / 10;
-    heightValue.innerHTML = currentHeight + "m";
-    updatePosition(currentPosition, currentHeight);
-};
+$("#fpControls").on("click", function() {
+    mode = "firstPerson";
 
-locToggle.addEventListener('change', function() {
-    if(this.checked) {
-        trackLocation();
-    } else {
-        navigator.geolocation.clearWatch(wpid);
-    }
+    $("#welcomeContainer").css("z-index", 1);
+    $("#mapContainer").css("z-index", 3);
+    $("#mapInstuctions").text("Start Locatie?");
+
+    $("#manualLoc").prop("disabled", true);
+    $("#autoLoc").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
+    $("#heightRange").prop("disabled", true);
+    $("#heightContainer").css("visibility", "hidden");
+    $("#accuracy").css("visibility", "hidden");
+
+    const startCoords = ol.proj.transform([5.303330, 51.688878], 'EPSG:4326', 'EPSG:3857')
+    setTimeout(toggleMap(startCoords, 15), 100);
+    positionFeature.setGeometry();
+});
+
+$("#earthControls").on("click", function() {
+    mode = "earth";
+
+    $("#welcomeContainer").css("z-index", 1);
+    $("#potree_container").css("z-index", 3);
+
+    enablePotree();
+
+    $("#manualLoc").prop("disabled", true);
+    $("#autoLoc").prop("disabled", true);
+    $("#fpControls").prop("disabled", true);
+    $("#heightRange").prop("disabled", true);
+    $("#heightContainer").css("visibility", "hidden");
+    $("#accuracy").css("visibility", "hidden");
 });
