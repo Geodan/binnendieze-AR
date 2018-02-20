@@ -35,19 +35,19 @@ Potree.DeviceOrientationControls = class DeviceOrientationControls extends THREE
         };
 
         if ('ondeviceorientationabsolute' in window) {
-            this.addEventListener('deviceorientationabsolute', onDeviceOrientationChangeEvent, false);
+            window.addEventListener('deviceorientationabsolute', onDeviceOrientationChangeEvent, false);
         } else if ('ondeviceorientation' in window) {
             alert("WARNING: Absolute coordinates could not be guaranteed.");
-            this.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
+            window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
         } else {
             alert("ERROR: No device orientation found.");
         }
         // window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
-        this.addEventListener('orientationchange', onScreenOrientationChangeEvent, false);
+        window.addEventListener('orientationchange', onScreenOrientationChangeEvent, false);
     }
 
     setScene (scene) {
-        this.scene = scene;
+        window.scene = scene;
     }
 
     update (delta) {
