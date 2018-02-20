@@ -54,6 +54,7 @@ function enablePotree() {
             if (mode === "firstPerson") {
                 viewer.setMoveSpeed(1);
                 viewer.setNavigationMode(Potree.FirstPersonControls);
+                viewer.fpControls.fixedZ = 3.5;
             } else if (mode === "earth") {
                 viewer.setNavigationMode(Potree.EarthControls);
                 viewer.scene.view.position.x = 149281.65978994727;
@@ -88,3 +89,17 @@ $("#refreshMeasurements").on("click", function() {
     $("#refreshMeasurements").prop("disabled", true);
     $("#refreshMeasurements").css("visibility", "hidden");
 });
+
+$("#fixedZCheck").on("change", function() {
+    if (this.checked) {
+        $("#fixedZInput").prop("disabled", false);
+        viewer.fpControls.fixedZ = parseFloat($("#fixedZInput").val());
+    } else {
+        $("#fixedZInput").prop("disabled", true);
+        viewer.fpControls.fixedZ = null;
+    }
+});
+
+$("#fixedZInput").on("change", function() {
+    viewer.fpControls.fixedZ = parseFloat($("#fixedZInput").val());
+})

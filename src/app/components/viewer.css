@@ -34,3 +34,15 @@
     height: 10px;
     visibility: hidden;
 }
+
+#fixedZContainer {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    font-size: 8pt;
+    visibility: hidden;
+}
+
+#fixedZInput{
+    width: 3em;
+}
