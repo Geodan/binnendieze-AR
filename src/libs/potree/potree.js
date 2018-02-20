@@ -5458,6 +5458,8 @@ Potree.FirstPersonControls = class FirstPersonControls extends THREE.EventDispat
 
 		this.tweens = [];
 
+		this.fixedZ = null;
+
 		let drag = (e) => {
 			if(e.drag.object !== null){
 				return;
@@ -5676,6 +5678,12 @@ Potree.FirstPersonControls = class FirstPersonControls extends THREE.EventDispat
 			this.pitchDelta *= attenuation;
 			this.translationDelta.multiplyScalar(attenuation);
 			this.translationWorldDelta.multiplyScalar(attenuation);
+		}
+
+		{
+			if (this.fixedZ !== null) {
+				view.position.z = this.fixedZ;
+			}
 		}
 
 	}

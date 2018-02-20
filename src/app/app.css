@@ -103,3 +103,18 @@ input:checked + .slider:before {
     /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
     text-align: center;
 }
+
+.textBox label {
+    display: block;
+    float: left;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+.textBox input {
+    vertical-align: middle;
+}
+
+.textBox label span {
+    vertical-align: middle;
+}
