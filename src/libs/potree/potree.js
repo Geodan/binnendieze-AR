@@ -15421,6 +15421,7 @@ Potree.Viewer = class PotreeViewer extends THREE.EventDispatcher{
 		}
 		//
 		if(scene.view.navigationMode === Potree.DeviceOrientationControls){
+			this.controls.addListeners();
 			this.controls.setScene(scene);
 			this.controls.update(delta);
 

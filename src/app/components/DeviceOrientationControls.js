@@ -26,24 +26,32 @@ Potree.DeviceOrientationControls = class DeviceOrientationControls extends THREE
 
         this.screenOrientation = 0;
 
-        let onDeviceOrientationChangeEvent = e => {
+        this.onDeviceOrientationChangeEvent = e => {
             this.deviceOrientation = e;
         };
 
-        let onScreenOrientationChangeEvent = e => {
+        this.onScreenOrientationChangeEvent = e => {
             this.screenOrientation = window.orientation || 0;
         };
 
-        if ('ondeviceorientationabsolute' in window) {
-            window.addEventListener('deviceorientationabsolute', onDeviceOrientationChangeEvent, false);
-        } else if ('ondeviceorientation' in window) {
-            alert("WARNING: Absolute coordinates could not be guaranteed.");
-            window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
-        } else {
-            alert("ERROR: No device orientation found.");
+        this.listeners = false;
+    }
+
+    addListeners () {
+        if (this.listeners === false) {
+            if ('ondeviceorientationabsolute' in window) {
+                window.addEventListener('deviceorientationabsolute', this.onDeviceOrientationChangeEvent, false);
+            } else if ('ondeviceorientation' in window) {
+                alert("WARNING: Absolute coordinates could not be guaranteed.");
+                window.addEventListener('deviceorientation', this.onDeviceOrientationChangeEvent, false);
+            } else {
+                alert("ERROR: No device orientation found.");
+            }
+            // window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
+            window.addEventListener('orientationchange', this.onScreenOrientationChangeEvent, false);
+
+            this.listeners = true;
         }
-        // window.addEventListener('deviceorientation', onDeviceOrientationChangeEvent, false);
-        window.addEventListener('orientationchange', onScreenOrientationChangeEvent, false);
     }
 
     setScene (scene) {
