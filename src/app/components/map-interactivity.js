@@ -61,11 +61,7 @@ $("#submitLocation").on("click", function () {
 });
 
 $("#centerView").on("click", function() {
-    if (mode === "manual") {
-        view.fit(geolocation.getAccuracyGeometry(), map.getSize());
-    } else if (mode === "auto") {
-        view.setCenter(positionFeature.getGeometry().getCoordinates());
-    }
+    setMapView();
 
     $("#centerView").css("visibility", "hidden");
     $("#centerView").prop("disabled", true);

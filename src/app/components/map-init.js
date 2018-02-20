@@ -40,27 +40,3 @@ const map = new ol.Map({
     }),
     view: view
 });
-
-function toggleMap(coordinates, zoom) {
-    map.updateSize();
-    let accuracyGeometry;
-    if (typeof coordinates === "undefined") {
-        coordinates = geolocation.getPosition();
-        accuracyGeometry = geolocation.getAccuracyGeometry();
-    }
-
-    if (typeof coordinates !== "undefined") {
-        positionFeature.setGeometry(coordinates ?
-            new ol.geom.Point(coordinates) : null);
-        view.setCenter(coordinates);
-    }
-    if (typeof accuracyGeometry !== "undefined") {
-        accuracyFeature.setGeometry(accuracyGeometry);
-        view.fit(accuracyGeometry, map.getSize());
-        $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
-    }
-
-    if (typeof zoom !== "undefined") {
-        view.setZoom(zoom);
-    }
-}
