@@ -3,6 +3,14 @@ document.title = "Binnedieze 3D viewer";
 
 let mode;
 
+$(function() {
+    $("#accordion").accordion({
+        collapsible: true,
+        active: false,
+        icons: false
+    });
+});
+
 $("#manualLoc").on("click", function() {
     mode = "manual";
     geolocation.setTracking(true);
