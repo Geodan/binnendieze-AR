@@ -55,6 +55,7 @@ function enablePotree() {
                 viewer.setMoveSpeed(1);
                 viewer.setNavigationMode(Potree.FirstPersonControls);
                 viewer.fpControls.fixedZ = 3.5;
+                viewer.scene.view.pitch = 0;
             } else if (mode === "earth") {
                 viewer.setNavigationMode(Potree.EarthControls);
                 viewer.scene.view.position.x = 149281.65978994727;
