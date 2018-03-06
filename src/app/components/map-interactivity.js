@@ -14,7 +14,7 @@ const vector = new ol.layer.Vector({
                 width: 2
             })
         })
-    }),
+    })
 });
 map.addLayer(vector);
 
@@ -82,3 +82,7 @@ $("#mapClose").on("click", function() {
         $("#autoLoc").prop("disabled", false);
     }
 });
+
+$("#coverageChkbox").on("change", function() {
+    coverageLayer.setVisible(this.checked);
+})

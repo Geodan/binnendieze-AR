@@ -21,6 +21,27 @@ positionFeature.setStyle(new ol.style.Style({
     })
 }));
 
+const coverageLayer = new ol.layer.Vector({
+    title: 'Coverage',
+    source: new ol.source.Vector({
+        url: 'app/resources/vec/coverage.geojson',
+        format: new ol.format.GeoJSON()
+    }),
+    style: new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 3,
+            fill: new ol.style.Fill({
+                color: '#3399CC'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#000',
+                width: 1
+            })
+        })
+    })
+})
+
+
 const map = new ol.Map({
     layers: [
         new ol.layer.Tile({
@@ -30,7 +51,8 @@ const map = new ol.Map({
             source: new ol.source.Vector({
                 features: [accuracyFeature, positionFeature]
             })
-        })
+        }),
+        coverageLayer
     ],
     target: 'map',
     controls: ol.control.defaults({

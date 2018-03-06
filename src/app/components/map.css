@@ -45,5 +45,12 @@
     top: auto;
     right: auto;
     left: 1%;
+    bottom: 10%;
+}
+
+#coverage {
+    position: absolute;
+    left: 1%;
     bottom: 1%;
+    font-size: 7pt;
 }
