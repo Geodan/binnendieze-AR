@@ -82,7 +82,3 @@ $("#mapClose").on("click", function() {
         $("#autoLoc").prop("disabled", false);
     }
 });
-
-$("#coverageChkbox").on("change", function() {
-    coverageLayer.setVisible(this.checked);
-})

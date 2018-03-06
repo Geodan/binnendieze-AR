@@ -22,7 +22,7 @@ positionFeature.setStyle(new ol.style.Style({
 }));
 
 const coverageLayer = new ol.layer.Vector({
-    title: 'Coverage',
+    title: 'Puntenwolkdekking',
     source: new ol.source.Vector({
         url: 'app/resources/vec/coverage.geojson',
         format: new ol.format.GeoJSON()
@@ -41,11 +41,27 @@ const coverageLayer = new ol.layer.Vector({
     })
 })
 
-
 const map = new ol.Map({
     layers: [
-        new ol.layer.Tile({
-        source: new ol.source.OSM()
+        new ol.layer.Group({
+            title: 'Achtergrondkaarten',
+            layers: [
+                new ol.layer.Tile({
+                    title: 'OpenStreetMap',
+                    type: 'base',
+                    visible: true,
+                    source: new ol.source.OSM()
+                }),
+                new ol.layer.Tile({
+                    title: 'Luchtfoto',
+                    type: 'base',
+                    visible: false,
+                    source: new ol.source.TileWMS({
+                        url: 'https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wms',
+                        params: {'LAYERS': 'Actueel_ortho25'}
+                    })
+                }),
+            ]
         }),
         new ol.layer.Vector({
             source: new ol.source.Vector({
@@ -57,8 +73,13 @@ const map = new ol.Map({
     target: 'map',
     controls: ol.control.defaults({
         attributionOptions: {
-        collapsible: false
+            collapsible: false
         }
     }),
     view: view
 });
+
+const layerSwitcher = new ol.control.LayerSwitcher({
+    tipLabel: 'Legend' // Optional label for button
+});
+map.addControl(layerSwitcher);

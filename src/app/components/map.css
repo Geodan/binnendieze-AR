@@ -9,7 +9,7 @@
 #mapInstuctions {
     position: absolute;
     left: 50%;
-    top: 10%;
+    top: 2%;
     transform: translate(-50%);
 }
 
@@ -48,9 +48,10 @@
     bottom: 10%;
 }
 
-#coverage {
-    position: absolute;
-    left: 1%;
-    bottom: 1%;
-    font-size: 7pt;
+.layer-switcher {
+    font-size: 10pt;
+}
+
+.layer-switcher li.layer {
+    margin: 3px;
 }
