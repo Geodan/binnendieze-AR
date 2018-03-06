@@ -13,6 +13,7 @@ $("#manualLoc").on("click", function() {
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
     $("#fpControls").prop("disabled", true);
+    $("#earthControls").prop("disabled", true);
 
     setTimeout(toggleMap(), 100);
 });
@@ -29,6 +30,7 @@ $("#autoLoc").on("click", function() {
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
     $("#fpControls").prop("disabled", true);
+    $("#earthControls").prop("disabled", true);
 
     $("#accuracy").css("visibility", "hidden");
     $("#mapInstuctions").css("visibility", "hidden");
@@ -45,6 +47,7 @@ $("#fpControls").on("click", function() {
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
     $("#fpControls").prop("disabled", true);
+    $("#earthControls").prop("disabled", true);
     $("#heightRange").prop("disabled", true);
     $("#heightContainer").css("visibility", "hidden");
     $("#accuracy").css("visibility", "hidden");
@@ -68,6 +71,7 @@ $("#earthControls").on("click", function() {
     $("#manualLoc").prop("disabled", true);
     $("#autoLoc").prop("disabled", true);
     $("#fpControls").prop("disabled", true);
+    $("#earthControls").prop("disabled", true);
     $("#heightRange").prop("disabled", true);
     $("#heightContainer").css("visibility", "hidden");
     $("#accuracy").css("visibility", "hidden");
