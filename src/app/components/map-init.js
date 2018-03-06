@@ -58,17 +58,21 @@ const map = new ol.Map({
                     visible: false,
                     source: new ol.source.TileWMS({
                         url: 'https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wms',
-                        params: {'LAYERS': 'Actueel_ortho25'}
+                        params: {'LAYERS': 'Actueel_ortho25'},
+                        attributions: '© <a href="https://www.pdok.nl/nl/service/wms-luchtfoto-beeldmateriaal-pdok-25-cm-rgb">PDOK</a>',
                     })
                 }),
             ]
+        }),
+        new ol.layer.Group({
+            title: 'Datalagen',
+            layers: [coverageLayer]
         }),
         new ol.layer.Vector({
             source: new ol.source.Vector({
                 features: [accuracyFeature, positionFeature]
             })
-        }),
-        coverageLayer
+        })
     ],
     target: 'map',
     controls: ol.control.defaults({
