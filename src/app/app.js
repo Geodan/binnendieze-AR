@@ -9,6 +9,12 @@ $(function() {
         active: false,
         icons: false
     });
+
+    if (('ondeviceorientation' in window) && (/Mobi|Tablet|iPad|iPhone/.test(navigator.userAgent))) {
+        $("#accordion").accordion("option", {active: 0});
+    } else {
+        $("#accordion").accordion("option", {active: 1});
+    }
 });
 
 $("#manualLoc").on("click", function() {
