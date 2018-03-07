@@ -9,7 +9,7 @@
 #mapInstuctions {
     position: absolute;
     left: 50%;
-    top: 10%;
+    top: 2%;
     transform: translate(-50%);
 }
 
@@ -45,5 +45,13 @@
     top: auto;
     right: auto;
     left: 1%;
-    bottom: 1%;
+    bottom: 10%;
+}
+
+.layer-switcher {
+    font-size: 10pt;
+}
+
+.layer-switcher li.layer {
+    margin: 3px;
 }

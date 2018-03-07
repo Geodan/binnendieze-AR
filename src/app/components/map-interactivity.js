@@ -14,7 +14,7 @@ const vector = new ol.layer.Vector({
                 width: 2
             })
         })
-    }),
+    })
 });
 map.addLayer(vector);
 
@@ -80,5 +80,7 @@ $("#mapClose").on("click", function() {
         $("#welcomeContainer").css("z-index", 3);
         $("#manualLoc").prop("disabled", false);
         $("#autoLoc").prop("disabled", false);
+        $("#fpControls").prop("disabled", false);
+        $("#earthControls").prop("disabled", false);
     }
 });

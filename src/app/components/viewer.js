@@ -43,6 +43,9 @@ function enablePotree() {
             // Point styling
             const material = pointcloud.material;
             material.pointColorType = Potree.PointColorType.INTENSITY; // any Potree.PointColorType.XXXX
+            $("#optMaterial0").val('Intensity');
+            $("#optMaterial0").selectmenu("refresh");
+
             material.size = 3;
             material.pointSizeType = Potree.PointSizeType.FIXED;
             material.shape = Potree.PointShape.SQUARE;
@@ -52,9 +55,10 @@ function enablePotree() {
             // Camera settings
             viewer.fitToScreen();
             if (mode === "firstPerson") {
-                viewer.setMoveSpeed(1);
+                viewer.setMoveSpeed(2);
                 viewer.setNavigationMode(Potree.FirstPersonControls);
                 viewer.fpControls.fixedZ = 3.5;
+                viewer.scene.view.pitch = 0;
             } else if (mode === "earth") {
                 viewer.setNavigationMode(Potree.EarthControls);
                 viewer.scene.view.position.x = 149281.65978994727;
