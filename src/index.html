@@ -47,16 +47,42 @@
 
 		<div class="welcomeContainer" id="welcomeContainer" style="position: absolute; width: 100%; height: 100%; text-align: center; background-color: #ffffff; z-index: 3;">  <!--background-image: url('app/resources/img/binnendieze.jpg')-->
 			<h1>Binnendieze Demo</h1>
-			<h2>Mobiel - AR</h2>
-			<div>
-				Locatie bepaling:<br>
-				<button class="button" id="manualLoc">Handmatig</button><br>
-				<button class="button" id="autoLoc">Automatisch</button>
+
+			<div id="accordion">
+				<div>
+					<img src="app/resources/img/mobile_icon.svg" alt="Mobiel" style="width: 128px;"><br>
+					Mobiel
+				</div>
+
+				<div class="modeButtons">
+					Locatiebepaling:<br>
+					<button class="button" id="manualLoc">
+						<img src="app/resources/img/manual_icon.svg" alt="Handmatig" style="width: 50%; padding: 5px;"><br>
+						Handmatig
+					</button>
+					<button class="button" id="autoLoc">
+						<img src="app/resources/img/gps_icon.svg" alt="Automatisch" style="width: 50%; padding: 5px;"><br>
+						Automatisch
+					</button>
+				</div>
+
+				<div>
+					<img src="app/resources/img/desktop_icon.svg" alt="Desktop" style="width: 128px;"><br>
+					Desktop
+				</div>
+
+				<div class="modeButtons">
+					Controls:<br>
+					<button class="button" id="fpControls">
+						<img src="app/resources/img/fp_icon.svg" alt="First Person Controls" style="width: 50%; padding: 5px;"><br>
+						First Person
+					</button>
+					<button class="button" id="earthControls">
+						<img src="app/resources/img/earth_icon.svg" alt="Earth Controls" style="width: 50%; padding: 5px;"><br>
+						Earth
+					</button>
+				</div>
 			</div>
-			<h2>Desktop</h2>
-			Controls:<br>
-			<button class="button" id="fpControls">First Person</button><br>
-			<button class="button" id="earthControls">Earth</button>
 		</div>
 
 		<div class="mapContainer" id="mapContainer" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; background-color: #ffffff; z-index: 2;">

@@ -118,3 +118,30 @@ input:checked + .slider:before {
 .textBox label span {
     vertical-align: middle;
 }
+
+.modeButtons button {
+    width: 150px;
+    font-size: 10pt;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 1%;
+}
+
+.ui-accordion .ui-state-active {
+    background: #2980b9;
+    border: none;
+}
+
+.ui-accordion .ui-state-default {
+    border: none;
+    /* background: #ecf0f1; */
+}
+
+.ui-accordion .ui-corner-all {
+    border-radius: 0px;
+}
+/* #accordion {
+    width: 400px;
+
+} */
