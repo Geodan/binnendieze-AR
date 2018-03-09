@@ -39,6 +39,7 @@
     top: 1%;
     right: 1%;
     height: 40px;
+    visibility: hidden;
 }
 
 .ol-rotate {
