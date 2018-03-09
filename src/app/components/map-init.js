@@ -24,7 +24,7 @@ positionFeature.setStyle(new ol.style.Style({
 const coverageLayer = new ol.layer.Vector({
     title: 'Puntenwolkdekking',
     source: new ol.source.Vector({
-        url: 'app/resources/vec/coverage.geojson',
+        url: 'resources/vec/coverage.geojson',
         format: new ol.format.GeoJSON()
     }),
     style: new ol.style.Style({

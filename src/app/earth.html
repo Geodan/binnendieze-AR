@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" type="text/css" href="../libs/potree/potree.css">
+		<link rel="stylesheet" type="text/css" href="../libs/jquery-ui/jquery-ui.min.css">
+		<link rel="stylesheet" type="text/css" href="../libs/perfect-scrollbar/css/perfect-scrollbar.css">
+
+		<!-- <link rel="stylesheet" href="../libs/openlayers3/ol.css" type="text/css"> -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.6.4/ol.css">
+		<link rel="stylesheet" href="../libs/ol-layerswitcher/ol-layerswitcher.css">
+
+		<link rel="stylesheet" href="../libs/spectrum/spectrum.css" type="text/css">
+		<link rel="stylesheet" href="app.css">
+		<link rel="stylesheet" href="components/map.css">
+		<link rel="stylesheet" href="components/viewer.css">
+	</head>
+
+    <body>
+		<script src="../libs/jquery/jquery-3.1.1.js"></script>
+		<script src="../libs/spectrum/spectrum.js"></script>
+		<script src="../libs/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+		<script src="../libs/jquery-ui/jquery-ui.min.js"></script>
+		<script src="../libs/three.js/build/three.js"></script>
+		<script src="../libs/other/stats.min.js"></script>
+		<script src="../libs/other/BinaryHeap.js"></script>
+		<script src="../libs/tween/tween.min.js"></script>
+		<script src="../libs/d3/d3.js"></script>
+		<script src="../libs/proj4/proj4.js"></script>
+
+
+		<!-- <script src="../libs/openlayers3/ol.js"></script> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.6.4/ol.js"></script>
+
+		<script src="../libs/i18next/i18next.js"></script>
+
+		<script src="../libs/potree/potree.js"></script>
+
+		<script src="../libs/plasio/js/laslaz.js"></script>
+		<script src="../libs/plasio/vendor/bluebird.js"></script>
+
+		<div class="mapContainer" id="mapContainer" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; background-color: #ffffff; z-index: 1;">
+			<div id="map" class="map" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px;"></div>
+			<div><input class="textBox" id="centerView" type="image" src="resources/img/ux-locate-on.png" /></div>
+			<div><input id="mapClose" type="image" src="resources/img/close-icon.png"></div>
+		</div>
+
+		<div id="potree_container" class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 2;">
+			<div id="potree_render_area"></div>
+			<div id="potree_sidebar_container"></div>
+		</div>
+
+		<script src="../libs/ol-layerswitcher/ol-layerswitcher.js"></script>
+
+		<script src="components/DeviceOrientationControls.js"></script>
+
+		<script src="components/map-init.js"></script>
+		<script src="components/map-utils.js"></script>
+		<script src="components/location-init.js"></script>
+		<script src="components/location-utils.js"></script>
+
+		<script src="components/viewer.js"></script>
+		<script src="components/map-interactivity.js"></script>
+		<script src="components/location-track.js"></script>
+
+		<script src="earth.js"></script>
+    </body>
+</html>

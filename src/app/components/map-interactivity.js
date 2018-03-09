@@ -41,7 +41,7 @@ map.on("moveend", function() {
 
 $("#submitLocation").on("click", function () {
     $("#mapContainer").css("z-index", 1);
-    $("#potree_container").css("z-index", 3);
+    $("#potree_container").css("z-index", 2);
     $("#submitLocation").css("visibility", "hidden");
 
     function setPosition() {
@@ -54,6 +54,7 @@ $("#submitLocation").on("click", function () {
     if (typeof window.viewer === "undefined") {
         enablePotree().then(function() {
             setPosition();
+            $("#mapClose").css("visibility", "visible");
         });
     } else {
         setPosition();
@@ -68,19 +69,6 @@ $("#centerView").on("click", function() {
 });
 
 $("#mapClose").on("click", function() {
-    if (typeof window.viewer !== "undefined") {
-        $("#mapContainer").css("z-index", 1);
-        $("#potree_container").css("z-index", 3);
-    } else {
-        source.clear();
-        positionFeature.setGeometry();
-        accuracyFeature.setGeometry();
-        $("#submitLocation").css("visibility", "hidden");
-        $("#mapContainer").css("z-index", 1);
-        $("#welcomeContainer").css("z-index", 3);
-        $("#manualLoc").prop("disabled", false);
-        $("#autoLoc").prop("disabled", false);
-        $("#fpControls").prop("disabled", false);
-        $("#earthControls").prop("disabled", false);
-    }
+    $("#mapContainer").css("z-index", 1);
+    $("#potree_container").css("z-index", 2);
 });
