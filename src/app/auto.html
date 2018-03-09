@@ -81,6 +81,13 @@
 		<script src="components/map-interactivity.js"></script>
 		<script src="components/location-track.js"></script>
 
-		<script src="auto.js"></script>
+		<script>
+			const mode = 'auto';
+			geolocation.setTracking(true);
+
+			enablePotree();
+			map.removeInteraction(draw);
+			$("#mapClose").css("visibility", "visible");
+		</script>
     </body>
 </html>
