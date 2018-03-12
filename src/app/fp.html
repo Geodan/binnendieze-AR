@@ -6,6 +6,8 @@
     	<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+		<title>Binnendieze 3D viewer</title>
+
 		<link rel="stylesheet" type="text/css" href="../libs/potree/potree.css">
 		<link rel="stylesheet" type="text/css" href="../libs/jquery-ui/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="../libs/perfect-scrollbar/css/perfect-scrollbar.css">
@@ -74,6 +76,12 @@
 		<script src="components/map-interactivity.js"></script>
 		<script src="components/location-track.js"></script>
 
-		<script src="fp.js"></script>
+		<script>
+			const mode = "firstPerson";
+
+			const startCoords = ol.proj.transform([5.303330, 51.688878], 'EPSG:4326', 'EPSG:3857')
+			setTimeout(toggleMap(startCoords, 15), 100);
+			positionFeature.setGeometry();
+		</script>
     </body>
 </html>

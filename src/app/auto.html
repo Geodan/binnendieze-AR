@@ -6,6 +6,8 @@
     	<meta name="author" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+		<title>Binnendieze 3D viewer</title>
+
 		<link rel="stylesheet" type="text/css" href="../libs/potree/potree.css">
 		<link rel="stylesheet" type="text/css" href="../libs/jquery-ui/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="../libs/perfect-scrollbar/css/perfect-scrollbar.css">
@@ -79,6 +81,13 @@
 		<script src="components/map-interactivity.js"></script>
 		<script src="components/location-track.js"></script>
 
-		<script src="auto.js"></script>
+		<script>
+			const mode = 'auto';
+			geolocation.setTracking(true);
+
+			enablePotree();
+			map.removeInteraction(draw);
+			$("#mapClose").css("visibility", "visible");
+		</script>
     </body>
 </html>
