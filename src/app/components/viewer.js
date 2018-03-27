@@ -9,8 +9,12 @@ function enablePotree() {
         viewer.setFOV(60);
         viewer.setPointBudget(5*1000*1000);
         viewer.setEDLEnabled(true);
-        if (video.srcObject !== null) {
-            viewer.setBackground("none");
+        if (typeof video !== "undefined") {
+            if (video.srcObject !== null) {
+                viewer.setBackground("none");
+            } else {
+                viewer.setBackground("gradient");
+            }
         } else {
             viewer.setBackground("gradient");
         }
