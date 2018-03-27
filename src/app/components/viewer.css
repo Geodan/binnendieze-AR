@@ -18,8 +18,9 @@
 
 #measurementsContainer{
     position: absolute;
-    top: 2%;
-    right: 5%;
+    bottom: -1%;
+    left: 2%;
+    z-index: inherit;
 }
 
 #measurements {
@@ -28,7 +29,8 @@
 
 #refreshMeasurements {
     position: relative;
-    top: 7px;
+    left: 140px;
+    bottom: 23px;
     height: 10px;
 }
 
