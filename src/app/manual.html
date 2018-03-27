@@ -61,15 +61,17 @@
 		<div id="potree_container" class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 1;">
 			<div id="potree_render_area">
 				<div id="heightContainer">
-					<div class="slideContainer">
-						<input type="range" min="0" max="100" value="35" class="slider" id="heightRange">
-					</div>
-					<div class="sliderValue" id="heightValue"></div>
+					<div id="heightRange" style="height: 300px;"></div>
+					<input type="text" id="heightValue" readonly>
 				</div>
+
+				<input id="videoToggle" type="image" src="resources/img/camera_icon.svg" alt="Enable video background">
 			</div>
 
 			<div id="potree_sidebar_container"></div>
 		</div>
+
+		<div class="videoContainer"><video id="video" style="display: block; height: 100%; margin: 0 auto;" autoplay></video></div>
 
 		<script src="../libs/ol-layerswitcher/ol-layerswitcher.js"></script>
 
@@ -80,6 +82,7 @@
 		<script src="components/viewer.js"></script>
 		<script src="components/map-interactivity.js"></script>
 		<script src="components/location-track.js"></script>
+		<script src="components/video.js"></script>
 
 		<script>
 			const mode = 'manual';

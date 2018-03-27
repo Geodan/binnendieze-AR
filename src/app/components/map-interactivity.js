@@ -41,7 +41,7 @@ map.on("moveend", function() {
 
 $("#submitLocation").on("click", function () {
     $("#mapContainer").css("z-index", 1);
-    $("#potree_container").css("z-index", 2);
+    $("#potree_container").css("z-index", 3);
     $("#submitLocation").css("visibility", "hidden");
 
     function setPosition() {
@@ -70,5 +70,5 @@ $("#centerView").on("click", function() {
 
 $("#mapClose").on("click", function() {
     $("#mapContainer").css("z-index", 1);
-    $("#potree_container").css("z-index", 2);
+    $("#potree_container").css("z-index", 3);
 });
