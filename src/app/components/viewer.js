@@ -34,8 +34,9 @@ function enablePotree() {
                 $("#potree_container").css("z-index", 1);
                 $("#mapContainer").css("z-index", 3);
 
-                const coordinates = ol.proj.transform([viewer.scene.view.position.x, viewer.scene.view.position.y], 'EPSG:28992', 'EPSG:3857');
-                toggleMap(coordinates);
+                // const coordinates = ol.proj.transform([viewer.scene.view.position.x, viewer.scene.view.position.y], 'EPSG:28992', 'EPSG:3857');
+                // toggleMap(coordinates);
+                toggleMap([viewer.scene.view.position.x, viewer.scene.view.position.y]);
 
                 // if (mode === "manual") {
                 //     toggleMap();
@@ -61,7 +62,8 @@ function enablePotree() {
             material.pointColorType = Potree.PointColorType.INTENSITY; // any Potree.PointColorType.XXXX
             $("#optMaterial0").val('Intensity');
             $("#optMaterial0").selectmenu("refresh");
-
+            material.intensityRange = [0, 65536];
+            material.intensityGamma = 0.8;
             material.size = 3;
             material.pointSizeType = Potree.PointSizeType.FIXED;
             material.shape = Potree.PointShape.SQUARE;
@@ -75,10 +77,12 @@ function enablePotree() {
                 viewer.fpControls.lockElevation = true;
                 viewer.scene.view.position.z = parseFloat($("#fixedZInput").val());
             } else if (mode === "earth") {
+                // viewer.setNavigationMode(Potree.OrbitControls)
                 viewer.setNavigationMode(Potree.EarthControls);
-                viewer.scene.view.position.set(149281, 411044, 1353);
-                viewer.scene.view.yaw = 0;
-                viewer.scene.view.pitch = -Math.PI/2;
+                viewer.fitToScreen()
+                // viewer.scene.view.position.set(149281, 411044, 1353);
+                // viewer.scene.view.yaw = 0;
+                // viewer.scene.view.pitch = -Math.PI/2;
             } else if (mode === "manual" || mode === "auto") {
                 viewer.setNavigationMode(Potree.DeviceOrientationControls);
             } else {
@@ -95,9 +99,9 @@ function enablePotree() {
 $("#heightRange").slider({
     orientation: "vertical",
     range: "min",
-    min: 0,
-    max: 200,
-    value: currentHeight * 10,
+    min: 400,
+    max: 800,
+    value: 530,
     slide: function(event, ui) {
         currentHeight = ui.value/10
         $("#heightValue").val(currentHeight + " m");

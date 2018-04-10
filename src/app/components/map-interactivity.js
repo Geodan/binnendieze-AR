@@ -45,9 +45,15 @@ $("#submitLocation").on("click", function () {
     $("#submitLocation").css("visibility", "hidden");
 
     function setPosition() {
-        const position = ol.proj.transform(source.getFeatures()[0].getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:4326');
+        // const position = ol.proj.transform(source.getFeatures()[0].getGeometry().getCoordinates(), 'EPSG:3857', 'EPSG:4326');
+        const position = source.getFeatures()[0].getGeometry().getCoordinates()
+        // console.log(position);
         currentPosition.latitude = position[1];
         currentPosition.longitude = position[0];
+        // updatePosition(currentPosition, currentHeight);
+        currentPosition.x = position[0];
+        currentPosition.y = position[1];
+
         updatePosition(currentPosition, currentHeight);
     }
 

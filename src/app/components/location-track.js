@@ -25,22 +25,25 @@ geolocation.on('change:position', function() {
             $("#refreshMeasurements").css("visibility", "visible");
         }
 
-        let sumLatitude = 0;
-        let sumLongitude = 0;
+        let sumX = 0;
+        let sumY = 0;
         measuredPositions.forEach(coord => {
-            sumLatitude += coord[1];
-            sumLongitude += coord[0];
+            sumX += coord[0];
+            sumY += coord[1];
         });
-        const meanLatitude = sumLatitude / numMeasurements;
-        const meanLongitude = sumLongitude / numMeasurements;
+        const meanX = sumX / numMeasurements;
+        const meanY = sumY / numMeasurements;
 
-        const wgs84Loc = ol.proj.transform([meanLongitude, meanLatitude], 'EPSG:3857', 'EPSG:4326');
+        // const wgs84Loc = ol.proj.transform([meanY, meanX], 'EPSG:3857', 'EPSG:4326');
 
-        currentPosition.latitude = wgs84Loc[1];
-        currentPosition.longitude = wgs84Loc[0];
+        // currentPosition.latitude = wgs84Loc[1];
+        // currentPosition.longitude = wgs84Loc[0];
+        currentPosition.x = meanX;
+        currentPosition.y = meanY;
+
         updatePosition(currentPosition, currentHeight);
 
-        coordinates = [meanLongitude, meanLatitude];
+        coordinates = [meanX, meanY];
     }
 
     positionFeature.setGeometry(coordinates ?
