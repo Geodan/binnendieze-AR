@@ -1,8 +1,8 @@
 "use strict"
 
 const view = new ol.View({
-    center: [0, 0],
-    zoom: 19
+    center: ol.proj.transform([5.305330, 51.688878], 'EPSG:4326', 'EPSG:3857'),
+    zoom: 15
 });
 
 let accuracyFeature = new ol.Feature();

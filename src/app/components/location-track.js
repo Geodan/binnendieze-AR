@@ -6,7 +6,7 @@
 
 let measuredPositions = [];
 const averagingNum = 20;
-let firstPosition = true;
+// let firstPosition = true;
 
 geolocation.on('change:position', function() {
     let coordinates = geolocation.getPosition();
@@ -46,12 +46,12 @@ geolocation.on('change:position', function() {
     positionFeature.setGeometry(coordinates ?
         new ol.geom.Point(coordinates) : null);
 
-    if (firstPosition) {
-        if (setMapView()) {
-            $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
-            firstPosition = false;
-        }
-    } else {
+    // if (firstPosition) {
+    //     if (setMapView()) {
+    //         $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
+    //         firstPosition = false;
+    //     }
+    // } else {
         const viewExtent = map.getView().calculateExtent(map.getSize());
         const featureExtent = positionFeature.getGeometry().getExtent();
         const inView = ol.extent.containsExtent(viewExtent, featureExtent);
@@ -60,11 +60,11 @@ geolocation.on('change:position', function() {
             $("#centerView").prop("disabled", false);
 
         }
-    }
+    // }
 });
 
 geolocation.on('change:accuracy', function() {
-    if (mode === "manual" && !firstPosition) {
+    if (mode === "manual") {// && !firstPosition) {
         $("#accuracy").text('Geschatte accuraatheid: ' + geolocation.getAccuracy().toFixed(2) + ' [m]');
     }
 });

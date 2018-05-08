@@ -12,7 +12,7 @@ let currentPosition = {
     latitude: 0,
     longitude: 0
 }
-let currentHeight = 3.5;
+let currentHeight;
 
 const geolocation = new ol.Geolocation({
     trackingOptions: {enableHighAccuracy: true},

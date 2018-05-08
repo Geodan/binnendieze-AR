@@ -8,7 +8,7 @@
 
 		<title>Binnendieze 3D viewer</title>
 
-		<link rel="stylesheet" type="text/css" href="../libs/potree/potree.css">
+		<link rel="stylesheet" type="text/css" href="../libs/potree/potree/potree.css">
 		<link rel="stylesheet" type="text/css" href="../libs/jquery-ui/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="../libs/perfect-scrollbar/css/perfect-scrollbar.css">
 
@@ -17,6 +17,8 @@
 		<link rel="stylesheet" href="../libs/ol-layerswitcher/ol-layerswitcher.css">
 
 		<link rel="stylesheet" href="../libs/spectrum/spectrum.css" type="text/css">
+		<link rel="stylesheet" type="text/css" href="../libs/jstree/themes/mixed/style.css">
+
 		<link rel="stylesheet" href="app.css">
 		<link rel="stylesheet" href="components/map.css">
 		<link rel="stylesheet" href="components/viewer.css">
@@ -27,6 +29,7 @@
 		<script src="../libs/spectrum/spectrum.js"></script>
 		<script src="../libs/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
 		<script src="../libs/jquery-ui/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 		<script src="../libs/three.js/build/three.js"></script>
 		<script src="../libs/other/stats.min.js"></script>
 		<script src="../libs/other/BinaryHeap.js"></script>
@@ -39,13 +42,14 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.6.4/ol.js"></script>
 
 		<script src="../libs/i18next/i18next.js"></script>
+		<script src="../libs/jstree/jstree.js"></script>
 
-		<script src="../libs/potree/potree.js"></script>
+		<script src="../libs/potree/potree/potree.js"></script>
 
 		<script src="../libs/plasio/js/laslaz.js"></script>
 		<script src="../libs/plasio/vendor/bluebird.js"></script>
 
-		<div class="mapContainer" id="mapContainer" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; background-color: #ffffff; z-index: 2;">
+		<div class="mapContainer" id="mapContainer" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; background-color: #ffffff; z-index: 3;">
 			<div id="map" class="map" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px;"></div>
 			<div class="textBox" id="mapInstuctions">Wat is uw precieze locatie?</div>
 			<div class="textBox" id="accuracy">Geschatte accuraatheid: -</div>
@@ -57,20 +61,19 @@
 		<div id="potree_container" class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 1;">
 			<div id="potree_render_area">
 				<div id="heightContainer">
-					<div class="slideContainer">
-						<input type="range" min="0" max="100" value="35" class="slider" id="heightRange">
-					</div>
-					<div class="sliderValue" id="heightValue"></div>
+					<div id="heightRange" style="height: 300px;"></div>
+					<input type="text" id="heightValue" readonly>
 				</div>
+
+				<input id="videoToggle" type="image" src="resources/img/camera_icon.svg" alt="Enable video background">
 			</div>
 
 			<div id="potree_sidebar_container"></div>
-			</div>
 		</div>
 
-		<script src="../libs/ol-layerswitcher/ol-layerswitcher.js"></script>
+		<div class="videoContainer"><video id="video" style="display: block; height: 100%; margin: 0 auto;" autoplay></video></div>
 
-		<script src="components/DeviceOrientationControls.js"></script>
+		<script src="../libs/ol-layerswitcher/ol-layerswitcher.js"></script>
 
 		<script src="components/map-init.js"></script>
 		<script src="components/map-utils.js"></script>
@@ -79,10 +82,13 @@
 		<script src="components/viewer.js"></script>
 		<script src="components/map-interactivity.js"></script>
 		<script src="components/location-track.js"></script>
+		<script src="components/video.js"></script>
 
 		<script>
 			const mode = 'manual';
 			geolocation.setTracking(true);
+
+			currentHeight = 7.5;
 		</script>
     </body>
 </html>
