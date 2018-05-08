@@ -49,12 +49,8 @@
 	<script src="../libs/plasio/js/laslaz.js"></script>
 	<script src="../libs/plasio/vendor/bluebird.js"></script>
 
-	<div class="mapContainer" id="mapContainer" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; background-color: #ffffff; z-index: 2;">
+	<div class="mapContainer" id="mapContainer" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; background-color: #ffffff; z-index: 1;">
 		<div id="map" class="map" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px;"></div>
-		<div class="textBox" id="mapInstuctions">Geef een locatie</div>
-		<div>
-			<button class="button" id="submitLocation" disabled="true">Bevestig Locatie</button>
-		</div>
 		<div>
 			<input class="textBox" id="centerView" type="image" src="resources/img/ux-locate-on.png" />
 		</div>
@@ -63,19 +59,8 @@
 		</div>
 	</div>
 
-	<div id="potree_container" class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 1;">
-		<div id="potree_render_area">
-			<div id="fixedZContainer">
-				<div class="textBox">
-					<label for="fixedZCheck">
-						<input type="checkbox" id="fixedZCheck" checked>
-						<span>Z vastzetten:</span>
-					</label>
-					<input id="fixedZInput" type="number" value="3.5" step="0.1" min="0" max="10">
-				</div>
-			</div>
-		</div>
-
+	<div id="potree_container" class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; z-index: 2;">
+		<div id="potree_render_area"></div>
 		<div id="potree_sidebar_container"></div>
 	</div>
 
@@ -91,13 +76,15 @@
 	<script src="components/location-track.js"></script>
 
 	<script>
-		const mode = "firstPerson";
+		const mode = "path";
 
 		const startCoords = ol.proj.transform([5.303330, 51.688878], 'EPSG:4326', 'EPSG:3857')
 		setTimeout(toggleMap(startCoords, 15), 100);
 		positionFeature.setGeometry();
 
-		currentHeight = 3.5;
+		enablePotree();
+		$("#mapClose").css("visibility", "visible");
+		map.removeInteraction(draw);
 	</script>
 </body>
 
