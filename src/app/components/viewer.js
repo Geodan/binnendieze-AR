@@ -62,8 +62,8 @@ function enablePotree() {
         $('#heightValue').text(currentHeight + 'm');
 
         Potree.loadPointCloud(
-            // 'greyhound://https://binnendieze.geodan.nl/resource/binnendieze/',
-            'greyhound://metis.geodan.nl:8082/resource/binnendieze/',
+            'greyhound://https://binnendieze.geodan.nl/resource/binnendieze/',
+            // 'greyhound://metis.geodan.nl:8082/resource/binnendieze/',
             'binnendieze',
             e => {
                 // Add point cloud to viewer

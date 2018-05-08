@@ -1,6 +1,6 @@
 #heightContainer {
     position: absolute;
-    bottom: -3%;
+    bottom: 1%;
     right: -150px;
     z-index: 2;
 }
@@ -16,7 +16,7 @@
     border: none;
 }
 
-#measurementsContainer{
+#measurementsContainer {
     position: absolute;
     bottom: -1%;
     left: 2%;
@@ -42,7 +42,7 @@
     z-index: 3;
 }
 
-#fixedZInput{
+#fixedZInput {
     width: 3em;
 }
 
