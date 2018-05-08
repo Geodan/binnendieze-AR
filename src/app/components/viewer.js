@@ -83,43 +83,6 @@ function enablePotree() {
                 material.uniforms.rgbGamma.value = 0.8;
                 material.intensityRange = [0, 46000];
 
-                // Camera settings
-                if (mode === 'firstPerson') {
-                    viewer.setMoveSpeed(2);
-                    viewer.setNavigationMode(Potree.FirstPersonControls);
-                    viewer.fpControls.lockElevation = true;
-                    viewer.scene.view.position.z = parseFloat(
-                        $('#fixedZInput').val()
-                    );
-                } else if (mode === 'path') {
-                    viewer.setMoveSpeed(2);
-                    viewer.setNavigationMode(Potree.PathControls);
-                    viewer.pathControls.setPath(curve);
-
-                    const curveMaterial = new THREE.LineBasicMaterial({
-                        color: 0xffff00,
-                        linewidth: 1
-                    });
-                    const curveGeometry = new THREE.Geometry();
-                    curveGeometry.vertices = curve.getPoints(2000);
-                    curveGeometry.computeBoundingSphere();
-
-                    const curveObject = new THREE.Line(
-                        curveGeometry,
-                        curveMaterial
-                    );
-                    viewer.scene.scene.add(curveObject);
-                } else if (mode === 'earth') {
-                    viewer.setNavigationMode(Potree.EarthControls);
-                    viewer.scene.view.position.set(149281, 411044, 1353);
-                    viewer.scene.view.yaw = 0;
-                    viewer.scene.view.pitch = -Math.PI / 2;
-                } else if (mode === 'manual' || mode === 'auto') {
-                    viewer.setNavigationMode(Potree.DeviceOrientationControls);
-                } else {
-                    reject();
-                }
-
                 const offset = pointcloud.pcoGeometry.offset;
                 const center = pointcloud.boundingSphere.center;
                 const bbox = pointcloud.boundingBox;
@@ -141,7 +104,45 @@ function enablePotree() {
                     0
                 );
 
-                viewer.scene.scene.add(meshPlane);
+                // Camera settings
+                if (mode === 'firstPerson') {
+                    viewer.setMoveSpeed(2);
+                    viewer.setNavigationMode(Potree.FirstPersonControls);
+                    viewer.fpControls.lockElevation = true;
+                    viewer.scene.view.position.z = parseFloat(
+                        $('#fixedZInput').val()
+                    );
+                    viewer.scene.scene.add(meshPlane);
+                } else if (mode === 'path') {
+                    viewer.setMoveSpeed(2);
+                    viewer.setNavigationMode(Potree.PathControls);
+                    viewer.pathControls.setPath(curve);
+
+                    const curveMaterial = new THREE.LineBasicMaterial({
+                        color: 0xffff00,
+                        linewidth: 1
+                    });
+                    const curveGeometry = new THREE.Geometry();
+                    curveGeometry.vertices = curve.getPoints(2000);
+                    curveGeometry.computeBoundingSphere();
+
+                    const curveObject = new THREE.Line(
+                        curveGeometry,
+                        curveMaterial
+                    );
+                    viewer.scene.scene.add(curveObject);
+                    viewer.scene.scene.add(meshPlane);
+                } else if (mode === 'earth') {
+                    viewer.setNavigationMode(Potree.EarthControls);
+                    viewer.scene.view.position.set(149281, 411044, 1353);
+                    viewer.scene.view.yaw = 0;
+                    viewer.scene.view.pitch = -Math.PI / 2;
+                    viewer.scene.scene.add(meshPlane);
+                } else if (mode === 'manual' || mode === 'auto') {
+                    viewer.setNavigationMode(Potree.DeviceOrientationControls);
+                } else {
+                    reject();
+                }
 
                 resolve();
             }
